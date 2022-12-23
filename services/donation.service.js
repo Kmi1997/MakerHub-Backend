@@ -1,4 +1,4 @@
-const Donation = require("../models/Donation");
+
 const db = require('../configDb');
 
 async function donationFn(data){
@@ -7,6 +7,11 @@ async function donationFn(data){
 
 };
 
+async function getDonation(){
+    return await db.Donation.findAll({attributes: ['id','amount', 'dateDonation']});
+};
+
 module.exports = {
-    donationFn
+    donationFn,
+    getDonation
 };
