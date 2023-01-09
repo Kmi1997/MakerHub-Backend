@@ -1,9 +1,12 @@
 const { Sequelize } = require("sequelize");
 const donationModel = require("./models/Donation");
-const internModel = require("./models/intern");
+const InternModel = require("./models/intern");
+const InternInternshipModel = require("./models/InternInternship");
+const InternshipModel = require("./models/internship");
 
+
+//create db
 function launchDB() {
-    
     const sequelize = new Sequelize('SCOOLFAMILY', process.env.USERNAME, process.env.DB_PASSWORD, {
         host: 'localhost',
         dialect: 'mysql',
@@ -13,15 +16,32 @@ function launchDB() {
     return sequelize;
 };
 
+//db launch 
 const sequelize = launchDB();
 
-
+//models definitions
 const db = {
     Sequelize, 
     sequelize, 
     Donation : donationModel(sequelize),
-    Intern : internModel(sequelize)
+    Intern : InternModel(sequelize),
+    Internship : InternshipModel(sequelize),
+    InternIntership: InternInternshipModel(sequelize)
 };
+
+//Many-to-many associations
+db.Intern.belongsToMany(db.Internship, {
+    through: db.InternIntership,
+    primaryKey: 'id'
+});
+
+db.Internship.belongsToMany(db.Intern, {
+    through: db.InternIntership,
+    primaryKey: 'id'
+});
+
+
+
 
 module.exports = db;
 

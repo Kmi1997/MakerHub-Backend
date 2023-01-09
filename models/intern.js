@@ -3,13 +3,14 @@ const { DataTypes } = require("sequelize");
 const InternModel = (sequelize) => {
 
     const Intern = sequelize.define('Intern', {
-        ChildName : {
-           type: DataTypes.STRING,
-           allowNull: false,
+
+        ChildName: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        ParentName : {
-           type : DataTypes.STRING,
-           allowNull: false
+        ParentName: {
+            type: DataTypes.STRING,
+            allowNull: false
         },
         ParentPhone: {
             type: DataTypes.STRING,
@@ -23,17 +24,23 @@ const InternModel = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false
         },
-        healthIssue : {
+        healthIssue: {
             type: DataTypes.STRING,
             allowNull: true
         },
         deleted: {
             type: DataTypes.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue: false
+        },
+        imgRights: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false
         }
-       });
-    
-       return Intern;
+    });
+
+    return Intern;
 };
 
 
