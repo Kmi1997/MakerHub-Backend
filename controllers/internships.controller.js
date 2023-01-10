@@ -11,6 +11,17 @@ const internshipController = {
         catch(error){
             res.status(500).json({error: error.message});
         };
+    },
+
+    getInternship : async(req, res) => {
+
+        try{
+            const resultsInternship = await internshipService.getInternship();
+            res.status(201).json(resultsInternship);
+        }
+        catch(error){
+            res.status(500).json({error: error.message});
+        };
     }
 };
 

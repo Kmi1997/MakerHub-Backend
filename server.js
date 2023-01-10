@@ -9,7 +9,7 @@ const internRouter = require("./routes/intern.route");
 const internshipRouter = require("./routes/internship.route");
 
 //Synchronisation DB
-db.sequelize.sync({force: true});
+db.sequelize.sync();
 
 //Middlewares globaux
 app.use(cors());

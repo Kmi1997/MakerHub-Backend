@@ -6,6 +6,13 @@ async function addInternship(data){
 
 };
 
+async function getInternship(){
+
+    const internship = await db.Internship.findAll();
+    return internship;
+};
+
 module.exports = {
-    addInternship
-}
+    addInternship,
+    getInternship
+};
