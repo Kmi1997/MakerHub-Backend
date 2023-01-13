@@ -24,9 +24,19 @@ const InternshipModel = (sequelize) => {
             type: DataTypes.DATEONLY,
             allowNull: false
         },
-        theme : {
-            type: DataTypes.STRING,
-            allowNull: true
+        startHour : {
+            type: DataTypes.STRING(5),
+                validate:{
+                is: /^[0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9]$/gm
+                },
+            allowNull: false
+        },
+        endHour : {
+            type: DataTypes.STRING(5),
+            validate:{
+                is: /^[0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9]$/gm
+            },
+            allowNull: false
         },
         deleted: {
             type: DataTypes.BOOLEAN,
@@ -51,7 +61,7 @@ const InternshipModel = (sequelize) => {
             defaultValue : 4
         },
         desc: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(100),
             allowNull: true
         }
        });
