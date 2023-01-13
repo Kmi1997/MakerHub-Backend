@@ -4,16 +4,23 @@ const InternModel = (sequelize) => {
 
     const Intern = sequelize.define('Intern', {
 
-        ChildName: {
+        childName: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        ParentName: {
+        parentName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        ParentPhone: {
+        parentPhone: {
             type: DataTypes.STRING,
+            allowNull: false
+        },
+        mail: {
+            type: DataTypes.STRING,
+            validate:{
+                is: /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/gm
+            },
             allowNull: false
         },
         age: {

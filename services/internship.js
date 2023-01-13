@@ -12,7 +12,14 @@ async function getInternship(){
     return internship;
 };
 
+async function getOne(id){
+    
+    const internship = await db.Internship.findByPk(id);
+    return internship;
+};
+
 module.exports = {
     addInternship,
-    getInternship
+    getInternship,
+    getOne
 };

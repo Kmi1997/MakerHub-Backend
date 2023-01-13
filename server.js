@@ -9,7 +9,7 @@ const internRouter = require("./routes/intern.route");
 const internshipRouter = require("./routes/internship.route");
 
 //Synchronisation DB
-db.sequelize.sync({});
+db.sequelize.sync();
 
 //Middlewares globaux
 app.use(cors());
@@ -21,6 +21,7 @@ app.use(express.json());
 app.use("/donation", donationRouter);
 app.use("/intern", internRouter);
 app.use("/internship", internshipRouter);
+app.use("/internship", internRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Serveur lancé sur le port ${process.env.PORT}`);
