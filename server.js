@@ -21,7 +21,6 @@ app.use(express.json());
 app.use("/donation", donationRouter);
 app.use("/intern", internRouter);
 app.use("/internship", internshipRouter);
-app.use("/internship", internRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Serveur lancé sur le port ${process.env.PORT}`);

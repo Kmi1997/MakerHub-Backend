@@ -44,6 +44,10 @@ const InternModel = (sequelize) => {
             type: DataTypes.BOOLEAN,
             allowNull: false,
             defaultValue: false
+        },
+        internshipId: {
+            type: DataTypes.INTEGER,
+            allowNull: false,
         }
     });
 

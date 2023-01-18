@@ -13,14 +13,24 @@ async function addIntern(data){
         
         // await intern.add(db.Internship, data.internshipId, {transaction}); -- other method
         await transaction.commit();
+        return intern;
     }
     catch(error){
         await transaction.rollback();
-        console.log(error, "Rollback effectué");
-    }
+        console.log("Rollback effectué", error);
+        
+        return null;
+  }
     
 };
 
+//get id to get internship name
+async function getHisInternship(childId){
+    const internship = await db.InternIntership.findByPk(childId);
+    return internship;
+};
+
 module.exports = {
-    addIntern
+    addIntern,
+    getHisInternship
 }

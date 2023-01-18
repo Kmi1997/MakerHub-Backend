@@ -6,7 +6,7 @@ const internshipController = {
     
         try{
             await internshipService.addInternship(req.body);
-            res.sendStatus(201);
+            res.status(201).json({message: "Création du stage réussie"});
         }
         catch(error){
             res.status(500).json({error: error.message});
@@ -30,7 +30,13 @@ const internshipController = {
 
         try{
             const resultsInternship = await internshipService.getOne(params);
-            res.status(201).json(resultsInternship);
+            
+            if(resultsInternship == null){
+                res.status(201).json({error:"Id inexistant"});
+            }
+            else{
+                res.status(201).json(resultsInternship);
+            };
         }
         catch(error){
             res.status(500).json({error: error.message});
