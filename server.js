@@ -7,6 +7,7 @@ const db = require("./configDb");
 const donationRouter = require("./routes/donation.route");
 const internRouter = require("./routes/intern.route");
 const internshipRouter = require("./routes/internship.route");
+const adminRouter = require("./routes/admin.route");
 
 //Synchronisation DB
 db.sequelize.sync();
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use("/donation", donationRouter);
 app.use("/intern", internRouter);
 app.use("/internship", internshipRouter);
+app.use("/admin", adminRouter);
 
 app.listen(process.env.PORT, () => {
     console.log(`Serveur lancé sur le port ${process.env.PORT}`);

@@ -1,4 +1,5 @@
 const { Sequelize } = require("sequelize");
+const adminModel = require("./models/admin");
 const donationModel = require("./models/Donation");
 const InternModel = require("./models/intern");
 const InternInternshipModel = require("./models/InternInternship");
@@ -21,12 +22,13 @@ const sequelize = launchDB();
 
 //models definitions
 const db = {
-    Sequelize, 
-    sequelize, 
-    Donation : donationModel(sequelize),
-    Intern : InternModel(sequelize),
-    Internship : InternshipModel(sequelize),
-    InternIntership: InternInternshipModel(sequelize)
+    Sequelize,
+    sequelize,
+    Donation: donationModel(sequelize),
+    Intern: InternModel(sequelize),
+    Internship: InternshipModel(sequelize),
+    InternIntership: InternInternshipModel(sequelize),
+    Admin: adminModel(sequelize)
 };
 
 //Many-to-many associations
