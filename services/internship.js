@@ -1,25 +1,49 @@
 const db = require("../configDb");
 
-async function addInternship(data){
+async function addInternship(data) {
 
     await db.Internship.create(data, {});
 
 };
 
-async function getInternship(){
+async function getInternship() {
 
     const internship = await db.Internship.findAll();
     return internship;
 };
 
-async function getOne(id){
-    
+async function getOne(id) {
+
     const internship = await db.Internship.findByPk(id);
     return internship;
 };
 
+async function updating(req, newData) {
+    const toUpdate = await getOne(req);
+    await toUpdate.update({
+        name: newData.name,
+        numberAvailable: newData.numberAvailable,
+        startDate: newData.startDate,
+        endDate: newData.endDate,
+        startHour: newData.startHour,
+        endHour: newData.endHour,
+        place: newData.place,
+        fromAge: newData.fromAge,
+        price: newData.price
+    });
+
+    await toUpdate.save();
+};
+
+async function destroy(id) {
+    const toDelete = await getOne(id);
+    await toDelete.destroy();
+}
+
 module.exports = {
     addInternship,
     getInternship,
-    getOne
+    getOne,
+    updating,
+    destroy
 };

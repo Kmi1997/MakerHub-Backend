@@ -5,27 +5,48 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <style>
+        body {
+            background-color: linear-gradient(to right bottom, rgba(244 178 48) 10%, #d4fef2 5%);
+            height: 100vh;
+            background-repeat: no-repeat;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin-bottom: 2vh;
+        }
+
+        p:last-child {
+            font-size: 1.2em;
+            margin-bottom: 3vh;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 10vh;
+        }
+    </style>
     <title>Mail automatique</title>
 </head>
 
 <body>
     <h1> s'Cool Family </h1>
     <p> Bonjour, <br>
-       <br> Nous vous confirmons l'inscription de {{name}} pour le {{internship}}.
+        <br> Nous vous confirmons l'inscription de {{name}} pour le {{internship}}.
         Vous recevrez un mail avec les infos utiles et nécessaires une semaine avant le stage.
         <br> <br> Nous sommes favorables à un paiement en liquide le premier jour. Toutefois, si vous le souhaitez, les
         coordonnées bancaires sont ci-dessous.
         Merci pour votre confiance.
         <br> A bientôt !
         <br> La s'COOL Family
-    
-<p>
-    <br> Compte : BE55 0689 4387 9644 
-    <br> Communication : prénom et nom enfant + intitulé du stage
-    <br> Prix : {{price}}€ par enfant ou {{price2}}€ par enfant à partir de deux enfants d'une même famille.
-</p>
-            
+
+    <p>
+        <br> Compte : BE55 0689 4387 9644
+        <br> Communication : prénom et nom enfant + intitulé du stage
+        <br> Prix : {{price}}€ par enfant ou {{price2}}€ par enfant à partir de deux enfants d'une même famille.
+    </p>
+
 </body>
 
 </html>

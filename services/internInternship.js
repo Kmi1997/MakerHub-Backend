@@ -1,11 +1,11 @@
-const db = require("../configDb");
+// const db = require("../configDb");
 
-async function addInternInternship(data){
+// async function addInternInternship(data){
 
-    await db.InternInternship.create(data);
+//     await db.InternInternship.create(data);
 
-};
+// };
 
-module.exports = {
-    addInternInternship
-};
+// module.exports = {
+//     addInternInternship
+// };

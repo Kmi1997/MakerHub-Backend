@@ -1,6 +1,5 @@
 const { Sequelize } = require("sequelize");
 const adminModel = require("./models/admin");
-const donationModel = require("./models/Donation");
 const InternModel = require("./models/intern");
 const InternInternshipModel = require("./models/InternInternship");
 const InternshipModel = require("./models/internship");
@@ -24,7 +23,6 @@ const sequelize = launchDB();
 const db = {
     Sequelize,
     sequelize,
-    Donation: donationModel(sequelize),
     Intern: InternModel(sequelize),
     Internship: InternshipModel(sequelize),
     InternIntership: InternInternshipModel(sequelize),
@@ -34,12 +32,14 @@ const db = {
 //Many-to-many associations
 db.Intern.belongsToMany(db.Internship, {
     through: db.InternIntership,
-    primaryKey: 'id'
+    primaryKey: 'id',
+    onDelete: 'CASCADE',
 });
 
 db.Internship.belongsToMany(db.Intern, {
     through: db.InternIntership,
-    primaryKey: 'id'
+    primaryKey: 'id',
+
 });
 
 

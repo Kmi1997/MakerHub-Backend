@@ -19,7 +19,6 @@ async function mail(receiver, internship, name, price) {
         const templateStyled = await inlineCss(templateFile, { url: "file:/Users/cam/Documents/backend/templates/mail.html" });
         const templateCompiled = hogan.compile(templateStyled);
         const templateRendered = templateCompiled.render({ internship: internship, name: name, price: price, price2: price - 10 });
-
         let info = {
             from: `"s'cool Family" <camillefrischmann@gmail.com>`,
             to: receiver,

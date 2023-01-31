@@ -3,16 +3,12 @@ const { DataTypes } = require("sequelize");
 const InternshipModel = (sequelize) => {
 
     const Internship = sequelize.define('Internship', {
-    
-        name : {
-           type: DataTypes.STRING,
-           allowNull: false,
+
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
-        numberAvailable : {
-           type : DataTypes.INTEGER,
-           allowNull: false
-        },
-        duration: {
+        numberAvailable: {
             type: DataTypes.INTEGER,
             allowNull: false
         },
@@ -24,16 +20,16 @@ const InternshipModel = (sequelize) => {
             type: DataTypes.DATEONLY,
             allowNull: false
         },
-        startHour : {
+        startHour: {
             type: DataTypes.STRING(5),
-                validate:{
+            validate: {
                 is: /^[0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9]$/gm
-                },
+            },
             allowNull: false
         },
-        endHour : {
+        endHour: {
             type: DataTypes.STRING(5),
-            validate:{
+            validate: {
                 is: /^[0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9]$/gm
             },
             allowNull: false
@@ -51,24 +47,24 @@ const InternshipModel = (sequelize) => {
             type: DataTypes.FLOAT,
             allowNull: false
         },
-        place:  {
+        place: {
             type: DataTypes.STRING,
             allowNull: false
         },
         fromAge: {
             type: DataTypes.INTEGER,
-            allowNull: true,
-            defaultValue : 4
+            allowNull: false,
+            defaultValue: 4
         },
         desc: {
             type: DataTypes.STRING(100),
             allowNull: true
         }
-       });
+    });
 
-       return Internship;
+    return Internship;
 
-       
+
 };
 
 module.exports = InternshipModel;

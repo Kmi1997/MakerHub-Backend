@@ -4,27 +4,27 @@ const internshipService = require("../services/internship");
 
 const internController = {
 
-    addIntern : async(req, res) => {
-    
-        
-        const intern =    await internService.addIntern(req.body);
-        
-        if(!intern) {
-            return res.status(400).json({message: "Erreur lors de l'envoi du formulaire"});
+    addIntern: async (req, res) => {
+
+        const intern = await internService.addIntern(req.body);
+        const internshipId = req.body.internshipId;
+        const internship = await internshipService.getOne(internshipId);
+
+        if (!intern) {
+            return res.status(400).json({ message: "Erreur lors de l'envoi du formulaire" });
         };
 
-        //get child's id of internInternship table
-        const tempId = await internService.getHisInternship(req.body.internshipId);
+        if (internship.numberAvailable <= 0) {
+            return res.status(200).json({ message: "Les inscriptions ne sont plus possibles" });
+        }
 
-        //get internship's id of internInternship table
-        const hisInternship = await internshipService.getOne(tempId.InternshipId);
+        await internService.descrease(internshipId);
 
         //to send the mail with the personalized data
-        mail(req.body.mail, hisInternship.name.toLowerCase(), req.body.childName, hisInternship.price)
-       
+        mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
 
         res.location('intern/' + intern.id);
-        res.status(201).json({message: "Inscription validée!"});
+        res.status(201).json({ message: "Inscription validée!" });
     }
 };
 
