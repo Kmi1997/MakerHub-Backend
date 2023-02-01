@@ -1,4 +1,5 @@
 const internshipService = require("../services/internship");
+const { ValidationError } = require("sequelize");
 
 const internshipController = {
 
@@ -10,7 +11,8 @@ const internshipController = {
             res.status(201).json({ message: "Création du stage réussie" });
         }
         catch (error) {
-            res.status(500).json({ 'error': error.message });
+            if (error instanceof ValidationError) return res.status(400).json({ message: error.message, data: error });
+            res.status(500).json({ error: error.message });
         };
     },
 
