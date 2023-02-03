@@ -1,3 +1,4 @@
+const { Internship, Intern } = require("../configDb");
 const db = require("../configDb");
 
 async function addIntern(data) {
@@ -25,6 +26,16 @@ async function addIntern(data) {
 
 };
 
+async function getAll() {
+    const allInterns = await db.Intern.findAll({
+        include: {
+            model: Internship,
+            attributes: ["name"]
+        }
+    });
+    return allInterns;
+}
+
 async function descrease(internshipId) {
     const internship = await db.Internship.findByPk(internshipId);
     await internship.increment({ numberAvailable: -1 });
@@ -34,5 +45,6 @@ async function descrease(internshipId) {
 
 module.exports = {
     addIntern,
-    descrease
+    descrease,
+    getAll
 };

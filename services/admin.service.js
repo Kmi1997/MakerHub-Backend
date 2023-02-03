@@ -1,6 +1,6 @@
 const db = require('../configDb');
 const bcrypt = require('bcrypt');
-require("dotenv").config();
+
 const jwt = require("jsonwebtoken");
 
 async function addAdmin(data) {
@@ -24,10 +24,15 @@ async function connection(data) {
 
         if (res) {
 
+            console.log(process.env.JWT_EXPIRY, typeof (process.env.JWT_EXPIRY));
+
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
                 algorithm: "HS256",
                 expiresIn: process.env.JWT_EXPIRY
             });
+
+            console.log(new Date().toISOString());
+            console.log(token);
             return token;
         }
         else if (!res) {

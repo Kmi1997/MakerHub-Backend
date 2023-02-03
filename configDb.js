@@ -7,7 +7,7 @@ const InternshipModel = require("./models/internship");
 
 //create db
 function launchDB() {
-    const sequelize = new Sequelize('SCOOLFAMILY', process.env.USERNAME, process.env.DB_PASSWORD, {
+    const sequelize = new Sequelize('SCOOLFAMILY', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
         host: 'localhost',
         dialect: 'mysql',
         logging: false

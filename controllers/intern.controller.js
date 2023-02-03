@@ -11,7 +11,7 @@ const internController = {
         const internship = await internshipService.getOne(internshipId);
 
         if (!intern) {
-            return res.status(400).json({ message: "Erreur lors de l'envoi du formulaire" });
+            return res.status(400).json({ message: "Le stage n'est pas trouvé." });
         };
 
         if (internship.numberAvailable <= 0) {
@@ -25,6 +25,18 @@ const internController = {
 
         res.location('intern/' + intern.id);
         res.status(201).json({ message: "Inscription validée!" });
+    },
+
+    getAll: async (req, res) => {
+
+        const interns = await internService.getAll();
+
+        if (!interns) {
+            return res.status(400).json({ message: "Les utilisateurs sont introuvables." });
+        }
+        else {
+            res.status(200).json(interns);
+        };
     }
 };
 

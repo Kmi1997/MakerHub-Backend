@@ -1,4 +1,7 @@
-require("dotenv").config();
+require("dotenv").config({
+    override: false
+});
+
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -17,8 +20,11 @@ app.use(morgan(':method :url :status - :response-time ms'));
 app.use(express.json());
 ///////////////////////
 
-//Routes principales
+// Guard
+const TokenCheckerMiddleware = require('./middlewares/tokenChecker.middleware');
+app.use(TokenCheckerMiddleware());
 
+//Routes principales
 app.use("/intern", internRouter);
 app.use("/internship", internshipRouter);
 app.use("/admin", adminRouter);
