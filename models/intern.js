@@ -1,5 +1,7 @@
 const { DataTypes } = require("sequelize");
 
+
+
 const InternModel = (sequelize) => {
 
     const Intern = sequelize.define('Intern', {
@@ -18,8 +20,8 @@ const InternModel = (sequelize) => {
         },
         mail: {
             type: DataTypes.STRING,
-            validate:{
-                is: /^[\w\.]+@([\w-]+\.)+[\w-]{2,4}$/gm
+            validate: {
+                isEmail: { msg: "Format mail requis" }
             },
             allowNull: false
         },
@@ -34,11 +36,6 @@ const InternModel = (sequelize) => {
         healthIssue: {
             type: DataTypes.STRING,
             allowNull: true
-        },
-        deleted: {
-            type: DataTypes.BOOLEAN,
-            allowNull: false,
-            defaultValue: false
         },
         imgRights: {
             type: DataTypes.BOOLEAN,

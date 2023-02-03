@@ -33,12 +33,11 @@ const db = {
 db.Intern.belongsToMany(db.Internship, {
     through: db.InternIntership,
     primaryKey: 'id',
-    onDelete: 'CASCADE',
 });
 
 db.Internship.belongsToMany(db.Intern, {
     through: db.InternIntership,
-    primaryKey: 'id',
+    primaryKey: 'id'
 
 });
 

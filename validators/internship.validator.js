@@ -1,17 +1,23 @@
 const yup = require('yup');
-
+const errorHour = "Le format heure doit être respecté";
 
 const internshipSchema = yup.object({
 
-    name: yup.string().required(),
-    place: yup.string().required(),
-    numberAvailable: yup.number("Pas de caractères acceptés").min(1).required(),
-    startDate: yup.date().min(new Date(), 'Choisir une date future').required(),
-    endDate: yup.date().min(new Date()).required(),
-    startHour: yup.string().matches(/^[0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9]$/gm).required(),
-    endHour: yup.string().matches(/^[0-1][0-9]:[0-5][0-9]|[2][0-4]:[0-5][0-9]$/gm).required(),
-    price: yup.number("Pas de caractères acceptés").required(),
-    fromAge: yup.number("Pas de caractères acceptés").required(),
+    name: yup.string().required("Le nom est obligatoire"),
+    place: yup.string().required("Le lieu est obligatoire"),
+    numberAvailable: yup.number().min(1).typeError('L\'âge doit être un nombre valide supérieur à 1').required("Le nombre de place est obligatoire"),
+
+    startDate: yup.date().typeError("Format date obligatoire").min(new Date(), 'Choisir une date future').required("La date de début est obligatoire"),
+    endDate: yup.date().typeError("Format date obligatoire").min(new Date(), 'Pas de date dans le passé :o').required("La date de début est obligatoire"),
+
+    startHour: yup.string().matches(/^([0-1][0-9]|2[0-4]):[0-5][0-9]$/, errorHour).required("L'heure est obligatoire"),
+    endHour: yup.string().matches(/^([0-1][0-9]|2[0-4]):[0-5][0-9]$/, errorHour).required("L'heure est obligatoire"),
+    price: yup.number().typeError("Nombre obligatoire").required("Le prix est obligatoire"),
+
+    fromAge: yup.number()
+        .typeError('L\'âge doit être un nombre valide supérieur à 1')
+        .min(1, 'L\'âge doit être minimum 1 an')
+        .required('L\'âge est obligatoire'),
 });
 
 
