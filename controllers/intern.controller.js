@@ -37,7 +37,18 @@ const internController = {
         else {
             res.status(200).json(interns);
         };
-    }
+    },
+
+    updating: async (req, res) => {
+        try {
+            const params = req.params.id;
+            await internService.updating(params, req.body);
+            res.status(201).json({ message: "Inscription mise à jour" });
+        }
+        catch (err) {
+            res.status(422).json({ message: "Erreur de données" });
+        }
+    },
 };
 
 module.exports = internController;

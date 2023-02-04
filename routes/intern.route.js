@@ -7,6 +7,6 @@ const internRouter = express.Router();
 
 internRouter.post("/addIntern", bodyMiddleware(internSchema), internController.addIntern);
 internRouter.get("/getAll", internController.getAll);
-
+internRouter.patch("/update/:id", bodyMiddleware(internSchema), internController.updating);
 
 module.exports = internRouter;

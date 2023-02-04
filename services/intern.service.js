@@ -33,6 +33,7 @@ async function getAll() {
             attributes: ["name"]
         }
     });
+
     return allInterns;
 }
 
@@ -43,8 +44,40 @@ async function descrease(internshipId) {
     await internship.save();
 };
 
+async function updating(req, newData) {
+
+    const toUpdate = await db.Intern.findByPk(req);
+
+    if (toUpdate.internshipId == newData.internshipId) {
+        await toUpdate.update({
+            childName: newData.childName,
+            parentName: newData.parentName,
+            parentPhone: newData.parentPhone,
+            paid: newData.paid,
+            imgRights: newData.imgRights,
+            healthIssue: newData.healthIssue,
+            age: newData.age,
+            mail: newData.mail,
+            internshipId: newData.internshipId
+        });
+        console.log("c'est sauvé!");
+        await toUpdate.save();
+        return toUpdate;
+    };
+
+    await toUpdate.destroy();
+    // const newIntern = await addIntern(newData);
+    const newIntern = await db.Intern.create(newData);
+    await newIntern.addInternship(newData.internshipId);
+
+    console.log(newIntern);
+    return newIntern;
+
+};
+
 module.exports = {
     addIntern,
     descrease,
-    getAll
+    getAll,
+    updating
 };

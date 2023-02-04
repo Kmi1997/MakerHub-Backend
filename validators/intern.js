@@ -10,7 +10,7 @@ const internSchema = yup.object({
     parentName: yup.string().typeError(stringError).required(required),
     parentPhone: yup.string().typeError(stringError).required(required),
     age: yup.number().typeError(numberError).required(required),
-    paid: yup.bool().typeError().required(required),
+    paid: yup.bool().required(required),
     mail: yup.string().email("Format mail obligatoire").required(required),
     healthIssues: yup.string().typeError(stringError).nullable(),
     imgRights: yup.bool().required(),

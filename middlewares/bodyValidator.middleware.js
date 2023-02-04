@@ -11,13 +11,11 @@ const bodyValidation = (validator, code = 422) => {
     return async (req, res, next) => {
         try {
             const data = await validator.noUnknown().validate(req.body, { abortEarly: false });
-            console.log(req.body, data);
             req.body = data;
 
             return next();
         }
         catch (yupError) {
-            console.log(yupError);
             res.status(code).json({ errors: yupError.errors, code });
         }
     };
