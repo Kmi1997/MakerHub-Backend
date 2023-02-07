@@ -13,7 +13,6 @@ const internSchema = yup.object({
     paid: yup.bool().required(required),
     mail: yup.string().email("Format mail obligatoire").required(required),
     healthIssues: yup.string().typeError(stringError).nullable(),
-    imgRights: yup.bool().required(),
     internshipId: yup.number().typeError(numberError).required(required),
 
 });
