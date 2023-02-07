@@ -54,6 +54,7 @@ const internController = {
         try {
             const params = req.params.id;
             await internService.destroy(params);
+            // await internService.increment(params);
             res.status(201).json({ message: "Utilisateur supprimé" });
         }
         catch (err) {

@@ -44,6 +44,12 @@ async function descrease(internshipId) {
     await internship.save();
 };
 
+// async function increment() {
+//     const internship = await db.Internship.findByPk(internshipId);
+//     await internship.increment({ numberAvailable: +1 });
+//     await internship.save();
+// };
+
 async function updating(req, newData) {
 
     const toUpdate = await db.Intern.findByPk(req);
