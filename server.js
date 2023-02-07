@@ -13,7 +13,7 @@ const adminRouter = require("./routes/admin.route");
 const paramsRouter = require('./routes/params.route');
 
 //Synchronisation DB
-db.sequelize.sync({ force: true });
+db.sequelize.sync();
 
 //Middlewares globaux
 app.use(cors());
@@ -22,8 +22,8 @@ app.use(express.json());
 ///////////////////////
 
 // Guard
-// const TokenCheckerMiddleware = require('./middlewares/tokenChecker.middleware');
-// app.use(TokenCheckerMiddleware());
+const TokenCheckerMiddleware = require('./middlewares/tokenChecker.middleware');
+app.use(TokenCheckerMiddleware());
 
 //Routes principales
 app.use("/intern", internRouter);
