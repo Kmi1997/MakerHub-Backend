@@ -10,9 +10,10 @@ const db = require("./configDb");
 const internRouter = require("./routes/intern.route");
 const internshipRouter = require("./routes/internship.route");
 const adminRouter = require("./routes/admin.route");
+const paramsRouter = require('./routes/params.route');
 
 //Synchronisation DB
-db.sequelize.sync();
+db.sequelize.sync({ force: true });
 
 //Middlewares globaux
 app.use(cors());
@@ -21,13 +22,15 @@ app.use(express.json());
 ///////////////////////
 
 // Guard
-const TokenCheckerMiddleware = require('./middlewares/tokenChecker.middleware');
-app.use(TokenCheckerMiddleware());
+// const TokenCheckerMiddleware = require('./middlewares/tokenChecker.middleware');
+// app.use(TokenCheckerMiddleware());
 
 //Routes principales
 app.use("/intern", internRouter);
 app.use("/internship", internshipRouter);
 app.use("/admin", adminRouter);
+app.use("/params", paramsRouter);
+
 
 app.listen(process.env.PORT, () => {
     console.log(`Serveur lancé sur le port ${process.env.PORT}`);

@@ -75,9 +75,15 @@ async function updating(req, newData) {
 
 };
 
+async function destroy(id) {
+    const toDelete = await db.Intern.findByPk(id);
+    await toDelete.destroy();
+}
+
 module.exports = {
     addIntern,
     descrease,
     getAll,
-    updating
+    updating,
+    destroy
 };

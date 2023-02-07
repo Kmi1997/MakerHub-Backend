@@ -3,6 +3,7 @@ const adminModel = require("./models/admin");
 const InternModel = require("./models/intern");
 const InternInternshipModel = require("./models/InternInternship");
 const InternshipModel = require("./models/internship");
+const paramsModel = require("./models/params");
 
 
 //create db
@@ -26,7 +27,8 @@ const db = {
     Intern: InternModel(sequelize),
     Internship: InternshipModel(sequelize),
     InternIntership: InternInternshipModel(sequelize),
-    Admin: adminModel(sequelize)
+    Admin: adminModel(sequelize),
+    Params: paramsModel(sequelize)
 };
 
 //Many-to-many associations
@@ -41,6 +43,11 @@ db.Internship.belongsToMany(db.Intern, {
 
 });
 
+
+// One-to-one association
+
+db.Admin.hasOne(db.Params, { onDelete: 'CASCADE', onUpdate: 'CASCADE' });
+db.Params.belongsTo(db.Admin);
 
 
 

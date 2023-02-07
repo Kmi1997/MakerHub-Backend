@@ -37,6 +37,37 @@ const adminController = {
         catch (error) {
             console.log(error);
         }
+    },
+
+    getAll: async (req, res) => {
+
+        const allAdmins = await adminService.getAll();
+
+        if (allAdmins) return res.status(200).json(allAdmins);
+
+        return res.status(404).json({ message: "Ressource introuvable" });
+    },
+
+    update: async (req, res) => {
+        try {
+            const params = req.params.id;
+            await adminService.updating(params, req.body);
+            res.status(201).json({ message: "Administrateur mise à jour" });
+        }
+        catch (err) {
+            res.status(422).json({ message: "Erreur de données" });
+        }
+    },
+
+    destroy: async (req, res) => {
+        try {
+            const params = req.params.id;
+            await adminService.destroy(params);
+            res.status(201).json({ message: "Administrateur supprimé" });
+        }
+        catch (err) {
+            res.status(404).json({ message: "Administrateur introuvable" });
+        }
     }
 };
 

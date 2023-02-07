@@ -49,6 +49,17 @@ const internController = {
             res.status(422).json({ message: "Erreur de données" });
         }
     },
+
+    destroy: async (req, res) => {
+        try {
+            const params = req.params.id;
+            await internService.destroy(params);
+            res.status(201).json({ message: "Utilisateur supprimé" });
+        }
+        catch (err) {
+            res.status(404).json({ message: "Utilisateur introuvable" });
+        }
+    }
 };
 
 module.exports = internController;

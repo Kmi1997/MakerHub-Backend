@@ -1,5 +1,6 @@
 const db = require('../configDb');
 const bcrypt = require('bcrypt');
+const { Op } = require("sequelize");
 
 const jwt = require("jsonwebtoken");
 
@@ -42,12 +43,41 @@ async function getThisAdmin(token) {
     token = token.replace('Bearer ', "");
     const decoded = jwt.decode(token);
 
-    return db.Admin.findByPk(decoded.id, { attributes: ['username'] });
+    return db.Admin.findByPk(decoded.id, { attributes: ['username', "superRoot"] });
+}
+
+async function getAll() {
+    const allAdmins = db.Admin.findAll({ where: { username: { [Op.notLike]: "root" } }, attributes: ["id", "username", "superRoot"] });
+    return allAdmins;
+};
+
+async function updating(req, newData) {
+
+    const toUpdate = await db.Admin.findByPk(req);
+    const saltRounds = 10;
+    newData.password = await bcrypt.hash(newData.password, saltRounds);
+
+    await toUpdate.update({
+        username: newData.username,
+        password: newData.password,
+        superRoot: newData.superRoot
+    });
+
+    await toUpdate.save();
+    return toUpdate;
+};
+
+async function destroy(id) {
+    const toDelete = await db.Admin.findByPk(id);
+    await toDelete.destroy();
 }
 
 
 module.exports = {
     connection,
     addAdmin,
-    getThisAdmin
+    getThisAdmin,
+    getAll,
+    updating,
+    destroy
 };
