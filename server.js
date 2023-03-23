@@ -21,9 +21,6 @@ app.use(morgan(':method :url :status - :response-time ms'));
 app.use(express.json());
 ///////////////////////
 
-// Guard
-// const TokenCheckerMiddleware = require('./middlewares/tokenChecker.middleware');
-// app.use(TokenCheckerMiddleware());
 
 //Routes principales
 app.use("/intern", internRouter);

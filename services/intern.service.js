@@ -66,13 +66,12 @@ async function updating(req, newData) {
             mail: newData.mail,
             internshipId: newData.internshipId
         });
-        console.log("c'est sauvé!");
+        console.log("c'est sauvegardé!!");
         await toUpdate.save();
         return toUpdate;
     };
 
     await toUpdate.destroy();
-    // const newIntern = await addIntern(newData);
     const newIntern = await db.Intern.create(newData);
     await newIntern.addInternship(newData.internshipId);
 
