@@ -23,10 +23,10 @@ app.use(express.json());
 
 
 //Routes principales
-app.use("/intern", internRouter);
+app.use("/registration", internRouter);
 app.use("/internship", internshipRouter);
 app.use("/admin", adminRouter);
-app.use("/params", paramsRouter);
+app.use("/param", paramsRouter);
 
 
 app.listen(process.env.PORT, () => {

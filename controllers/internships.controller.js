@@ -61,8 +61,8 @@ const internshipController = {
         try {
             const params = req.params.id;
             console.log(params);
-            await internshipService.destroy(params);
-            res.status(200).json({ message: "Stage supprimé." });
+            const results = await internshipService.destroy(params);
+            res.status(200).json({ message: "Stage supprimé.", results });
         }
         catch (err) {
             res.status(500).json({ message: "Erreur du serveur" });

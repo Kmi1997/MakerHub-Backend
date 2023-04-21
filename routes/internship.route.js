@@ -8,7 +8,7 @@ const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware')
 const internshipRouter = express.Router();
 
 internshipRouter.post("/addInternship", TokenCheckerMiddleware(), bodyMiddleware(internshipSchema), internshipController.addInternship);
-internshipRouter.get("/getInternship", internshipController.getInternship);
+internshipRouter.get("/getAll", internshipController.getInternship);
 
 internshipRouter.get("/getOne/:id", internshipController.getOne);
 internshipRouter.patch("/updating/:id", TokenCheckerMiddleware(), bodyMiddleware(internshipSchema), internshipController.updating);

@@ -10,7 +10,6 @@ async function addAdmin(data) {
 
     data.password = await bcrypt.hash(data.password, saltRounds);
     await db.Admin.create(data);
-    console.log(data);
 
 };
 
@@ -47,15 +46,15 @@ async function getThisAdmin(token) {
 }
 
 async function getAll() {
-    const allAdmins = db.Admin.findAll({ where: { username: { [Op.notLike]: "root" } }, attributes: ["id", "username", "superRoot"] });
+    const allAdmins = db.Admin.findAll({ where: { username: { [Op.notLike]: "root" } },
+        attributes: ["id", "username", "superRoot"] });
     return allAdmins;
 };
 
 async function updating(req, newData) {
 
     const toUpdate = await db.Admin.findByPk(req);
-    const saltRounds = 10;
-    newData.password = await bcrypt.hash(newData.password, saltRounds);
+    newData.password = await bcrypt.hash(newData.password, 9);
 
     await toUpdate.update({
         username: newData.username,

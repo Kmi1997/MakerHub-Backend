@@ -1,6 +1,6 @@
 const yup = require('yup');
 const required = "Le champ est requis";
-const stringError = "Châine de caractère obligatoire";
+const stringError = "Chaine de caractère obligatoire";
 const numberError = "Nombre obligatoire";
 
 const internSchema = yup.object({
@@ -12,7 +12,7 @@ const internSchema = yup.object({
     age: yup.number().typeError(numberError).required(required),
     paid: yup.bool().required(required),
     mail: yup.string().email("Format mail obligatoire").required(required),
-    healthIssues: yup.string().typeError(stringError).nullable(),
+    healthIssue: yup.string().typeError(stringError).nullable(),
     internshipId: yup.number().typeError(numberError).required(required),
 
 });

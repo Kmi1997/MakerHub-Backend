@@ -30,7 +30,7 @@ const internController = {
     getAll: async (req, res) => {
 
         const interns = await internService.getAll();
-
+    console.log(interns);
         if (!interns) {
             return res.status(400).json({ message: "Les utilisateurs sont introuvables." });
         }
@@ -53,9 +53,8 @@ const internController = {
     destroy: async (req, res) => {
         try {
             const params = req.params.id;
-            await internService.destroy(params);
-            // await internService.increment(params);
-            res.status(201).json({ message: "Utilisateur supprimé" });
+            const results = await internService.destroy(params);
+            res.status(201).json({ message: "Utilisateur supprimé", results});
         }
         catch (err) {
             res.status(404).json({ message: "Utilisateur introuvable" });

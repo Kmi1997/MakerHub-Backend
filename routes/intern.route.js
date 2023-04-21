@@ -9,6 +9,6 @@ const internRouter = express.Router();
 internRouter.post("/addIntern", bodyMiddleware(internSchema), internController.addIntern);
 internRouter.get("/getAll", TokenCheckerMiddleware(), internController.getAll);
 internRouter.patch("/update/:id", TokenCheckerMiddleware(), bodyMiddleware(internSchema), internController.updating);
-internRouter.delete("/destroy/:id", TokenCheckerMiddleware(), internController.destroy);
+internRouter.delete("/delete/:id", TokenCheckerMiddleware(), internController.destroy);
 
 module.exports = internRouter;

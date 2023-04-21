@@ -9,18 +9,13 @@ async function addIntern(data) {
     try {
 
         const intern = await db.Intern.create(data, { transaction });
-
         await intern.addInternship(data.internshipId, { transaction });
-        //  --> "magic method"
-
-        // await intern.add(db.Internship, data.internshipId, {transaction}); -- other method
         await transaction.commit();
         return intern;
     }
     catch (error) {
         await transaction.rollback();
         console.log("Rollback effectué", error);
-
         return null;
     }
 
@@ -44,12 +39,6 @@ async function descrease(internshipId) {
     await internship.save();
 };
 
-// async function increment() {
-//     const internship = await db.Internship.findByPk(internshipId);
-//     await internship.increment({ numberAvailable: +1 });
-//     await internship.save();
-// };
-
 async function updating(req, newData) {
 
     const toUpdate = await db.Intern.findByPk(req);
@@ -66,23 +55,28 @@ async function updating(req, newData) {
             mail: newData.mail,
             internshipId: newData.internshipId
         });
-        console.log("c'est sauvegardé!!");
         await toUpdate.save();
         return toUpdate;
     };
 
+    newData.id = toUpdate.id;
     await toUpdate.destroy();
     const newIntern = await db.Intern.create(newData);
     await newIntern.addInternship(newData.internshipId);
-
-    console.log(newIntern);
     return newIntern;
 
 };
 
 async function destroy(id) {
     const toDelete = await db.Intern.findByPk(id);
+    const upInternship = await db.Internship.findByPk(toDelete.internshipId);
+    await upInternship.update({
+        numberAvailable : upInternship.numberAvailable + 1
+    });
+
     await toDelete.destroy();
+    const intern = await db.Intern.findAll();
+    return intern;
 }
 
 module.exports = {

@@ -38,6 +38,8 @@ async function updating(req, newData) {
 async function destroy(id) {
     const toDelete = await getOne(id);
     await toDelete.destroy();
+    const internship = await db.Internship.findAll();
+    return internship;
 }
 
 module.exports = {
