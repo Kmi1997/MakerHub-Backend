@@ -4,12 +4,15 @@ const InternModel = require("./models/intern");
 const InternInternshipModel = require("./models/InternInternship");
 const InternshipModel = require("./models/internship");
 const paramsModel = require("./models/params");
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`
+});
 
 
 //create db
 function launchDB() {
-    const sequelize = new Sequelize('SCOOLFAMILY', process.env.DB_USERNAME, process.env.DB_PASSWORD, {
-        host: 'localhost',
+    const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
+        host: process.env.DB_HOST,
         dialect: 'mysql',
         logging: false
     });

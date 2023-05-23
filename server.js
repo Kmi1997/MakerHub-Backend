@@ -1,5 +1,5 @@
 require("dotenv").config({
-    override: false
+    path: `.env.${process.env.NODE_ENV}`
 });
 
 const express = require("express");
@@ -14,6 +14,8 @@ const paramsRouter = require('./routes/params.route');
 
 //Synchronisation DB
 db.sequelize.sync();
+
+
 
 //Middlewares globaux
 app.use(cors());
