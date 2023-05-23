@@ -1,7 +1,9 @@
 const db = require('../configDb');
 const bcrypt = require('bcrypt');
 const { Op } = require("sequelize");
-
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`
+});
 const jwt = require("jsonwebtoken");
 
 async function addAdmin(data) {
@@ -46,8 +48,10 @@ async function getThisAdmin(token) {
 }
 
 async function getAll() {
-    const allAdmins = db.Admin.findAll({ where: { username: { [Op.notLike]: "root" } },
-        attributes: ["id", "username", "superRoot"] });
+    const allAdmins = db.Admin.findAll({
+        where: { username: { [Op.notLike]: "root" } },
+        attributes: ["id", "username", "superRoot"]
+    });
     return allAdmins;
 };
 

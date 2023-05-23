@@ -1,4 +1,6 @@
-
+require("dotenv").config({
+    path: `.env.${process.env.NODE_ENV}`
+});
 const nodemailer = require("nodemailer");
 const hogan = require("hogan.js");
 const fs = require("fs");
