@@ -29,19 +29,19 @@ const db = {
     sequelize,
     Intern: InternModel(sequelize),
     Internship: InternshipModel(sequelize),
-    InternIntership: InternInternshipModel(sequelize),
+    InternInternship: InternInternshipModel(sequelize),
     Admin: adminModel(sequelize),
     Params: paramsModel(sequelize)
 };
 
 //Many-to-many associations
 db.Intern.belongsToMany(db.Internship, {
-    through: db.InternIntership,
+    through: db.InternInternship,
     primaryKey: 'id',
 });
 
 db.Internship.belongsToMany(db.Intern, {
-    through: db.InternIntership,
+    through: db.InternInternship,
     primaryKey: 'id'
 
 });

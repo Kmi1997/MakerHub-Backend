@@ -2,6 +2,7 @@ require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`
 });
 
+const path = require('path');
 const express = require("express");
 const app = express();
 const cors = require("cors");
@@ -12,19 +13,23 @@ const internshipRouter = require("./routes/internship.route");
 const adminRouter = require("./routes/admin.route");
 const paramsRouter = require('./routes/params.route');
 
-//Synchronisation DB
-db.sequelize.sync();
+
+//DB Sync
+db.sequelize.sync().then(() => {
+    console.log("DB sync ok");
+    app.set('view engine', 'ejs');
+    app.set('views', path.join(__dirname, 'templates'));
+});
 
 
-
-//Middlewares globaux
+//Globals middlewares
 app.use(cors());
+app.use(express.static('public'));
 app.use(morgan(':method :url :status - :response-time ms'));
-app.use(express.json());
 ///////////////////////
 
 
-//Routes principales
+//Main routes
 app.use("/registration", internRouter);
 app.use("/internship", internshipRouter);
 app.use("/admin", adminRouter);
@@ -32,7 +37,7 @@ app.use("/param", paramsRouter);
 
 
 app.listen(process.env.PORT, () => {
-    console.log(`Serveur lancé sur le port ${process.env.PORT}`);
+    console.log(`Server running on port ${process.env.PORT}`);
 })
 
 

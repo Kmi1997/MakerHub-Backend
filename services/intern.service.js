@@ -7,7 +7,6 @@ async function addIntern(data) {
     const transaction = await db.sequelize.transaction();
 
     try {
-
         const intern = await db.Intern.create(data, { transaction });
         await intern.addInternship(data.internshipId, { transaction });
         await transaction.commit();

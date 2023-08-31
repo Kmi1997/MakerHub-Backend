@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/home.css">
+</head>
+<body>
+<header>
+    <h1> s'Cool Family</h1>
+    <ul class="menu-horizontal">
+        <li><a href="#">Stages</a></li>
+        <li><a href="#">Inscriptions</a></li>
+        <li><a href="#">Paramètres</a></li>
+    </ul>
+</header>
+<section>
+    <% if (error) { %>
+    <h1>Titre positif</h1>
+    <% } %>
+    <canvas id="myHomeChart"></canvas>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        fetch('/admin/homeJson')
+            .then(data => data.json())
+            .then(dataJson => {
+                console.log(dataJson)
+                let labels = dataJson.map(x => x.name);
+                let numberAvailable = dataJson.map(x => x.numberPlaces - x.numberAvailable)
+                const canvas = document.getElementById('myHomeChart').getContext('2d');
+                const myChart = new Chart(canvas, {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Inscriptions par stage',
+                            data: numberAvailable,
+                            backgroundColor: 'rgba(47, 207, 255, 0.8)',
+                            borderColor: 'rgba(144, 73, 110, 0.8)',
+                            borderWidth: 2
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                title: {
+                                    display: true,
+                                    text: 'Nombre d\'inscriptions'
+                                },
+                                max: 50
+                            }
+                        }
+                    }
+                });
+            })
+            .catch(error => {
+                console.error('Erreur lors de la récupération des données JSON:', error);
+            });
+
+    </script>
+</section>
+</body>
+</html>

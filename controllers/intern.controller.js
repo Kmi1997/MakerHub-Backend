@@ -5,8 +5,9 @@ const internshipService = require("../services/internship");
 const internController = {
 
     addIntern: async (req, res) => {
-
+        console.log(req.body)
         const intern = await internService.addIntern(req.body);
+        console.log(req.body)
         const internshipId = req.body.internshipId;
         const internship = await internshipService.getOne(internshipId);
 
@@ -21,7 +22,7 @@ const internController = {
         await internService.descrease(internshipId);
 
         //to send the mail with the personalized data
-        mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
+        // mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
 
         res.location('intern/' + intern.id);
         res.status(201).json({ message: "Inscription validée!" });
@@ -30,12 +31,11 @@ const internController = {
     getAll: async (req, res) => {
 
         const interns = await internService.getAll();
-    console.log(interns);
         if (!interns) {
-            return res.status(400).json({ message: "Les utilisateurs sont introuvables." });
+            return res.status(400).render('test', { message: "Les utilisateurs sont introuvables." });
         }
         else {
-            res.status(200).json(interns);
+            res.status(200).render('test', {interns});
         };
     },
 

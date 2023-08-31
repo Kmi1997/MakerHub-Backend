@@ -22,7 +22,7 @@ async function updating(req, newData) {
     const toUpdate = await getOne(req);
     await toUpdate.update({
         name: newData.name,
-        numberAvailable: newData.numberAvailable,
+        numberPlaces: newData.numberPlaces,
         startDate: newData.startDate,
         endDate: newData.endDate,
         startHour: newData.startHour,
