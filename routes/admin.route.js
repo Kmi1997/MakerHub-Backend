@@ -8,6 +8,7 @@ const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware')
 adminRouter.post("/addAdmin", TokenCheckerMiddleware(), bodyMiddleware(adminSchema), adminController.addAdmin);
 adminRouter.get('/home', adminController.home);
 adminRouter.get('/homeJson', adminController.homeJson);
+adminRouter.get('/internships', adminController.viewInternships)
 adminRouter.post("/testConnection", adminController.testConnection);
 adminRouter.get("/getThisAdmin", TokenCheckerMiddleware(), adminController.getThisAdmin);
 adminRouter.get("/getAll", TokenCheckerMiddleware, adminController.getAll);

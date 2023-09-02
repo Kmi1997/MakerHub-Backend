@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/internships.css">
+</head>
+<body>
+<header>
+    <%- include('header') %>
+</header>
+<section>
+    <br/>
+    <div id="internship">
+        <% data.forEach(function(elem) { %>
+        <div>
+            <%= elem.name %>
+        </div>
+<!--        <div id="details"> <%= elem.numberPlaces %></div>-->
+        <% }); %>
+    </div>
+</section>
+</body>
+</html>

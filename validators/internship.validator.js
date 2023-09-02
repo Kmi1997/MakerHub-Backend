@@ -6,8 +6,10 @@ const internshipSchema = yup.object({
 
     name: yup.string().required("Le nom est obligatoire"),
     place: yup.string().required("Le lieu est obligatoire"),
-
     numberPlaces: yup.number().min(1).typeError('Entrez un nombre supérieur ou égal à 1').required("Le nombre de place est obligatoire"),
+    numberAvailable: yup.number().typeError().test('numbers-match', function (value) {
+        return value === this.parent.numberPlaces;
+    }).required(),
     startDate: yup.date().typeError("Format date obligatoire").min(new Date(tomorrow), 'Choisir une date future').required("La date de début est obligatoire"),
     endDate: yup.date().typeError("Format date obligatoire").min(new Date(tomorrow), 'Pas de date dans le passé :o').required("La date de fin est obligatoire"),
 

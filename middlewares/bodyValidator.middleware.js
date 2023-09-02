@@ -1,5 +1,5 @@
 const { BaseSchema } = require('yup');
-const { Request, Response, NextFunction, request } = require('express');
+const { Request, Response, NextFunction, request, json} = require('express');
 /**
  * 
  * @param {BaseSchema} validator schema de validation 'yup' 

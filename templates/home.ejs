@@ -8,24 +8,16 @@
 </head>
 <body>
 <header>
-    <h1> s'Cool Family</h1>
-    <ul class="menu-horizontal">
-        <li><a href="#">Stages</a></li>
-        <li><a href="#">Inscriptions</a></li>
-        <li><a href="#">Paramètres</a></li>
-    </ul>
+    <%- include('header') %>
 </header>
 <section>
-    <% if (error) { %>
-    <h1>Titre positif</h1>
-    <% } %>
-    <canvas id="myHomeChart"></canvas>
+    <br/>
+    <div id="chart"> <canvas id="myHomeChart"></canvas> </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        fetch('/admin/homeJson')
+        fetch('/homeJson')
             .then(data => data.json())
             .then(dataJson => {
-                console.log(dataJson)
                 let labels = dataJson.map(x => x.name);
                 let numberAvailable = dataJson.map(x => x.numberPlaces - x.numberAvailable)
                 const canvas = document.getElementById('myHomeChart').getContext('2d');
@@ -49,14 +41,15 @@
                                     display: true,
                                     text: 'Nombre d\'inscriptions'
                                 },
-                                max: 50
+                                max: 30
                             }
                         }
                     }
                 });
+                myChart.resize();
             })
             .catch(error => {
-                console.error('Erreur lors de la récupération des données JSON:', error);
+                const err = 'Erreur lors de la récupération des données JSON:' + error;
             });
 
     </script>

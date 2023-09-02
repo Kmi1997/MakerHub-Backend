@@ -6,7 +6,7 @@ const internshipController = {
     addInternship: async (req, res) => {
 
         try {
-
+            console.log(req.body)
             await internshipService.addInternship(req.body);
             res.status(201).json({ message: "Création du stage réussie" });
         }

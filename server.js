@@ -26,18 +26,21 @@ db.sequelize.sync().then(() => {
 app.use(cors());
 app.use(express.static('public'));
 app.use(morgan(':method :url :status - :response-time ms'));
+app.use(express.json());
 ///////////////////////
 
 
 //Main routes
 app.use("/registration", internRouter);
 app.use("/internship", internshipRouter);
-app.use("/admin", adminRouter);
+app.use("/", adminRouter);
 app.use("/param", paramsRouter);
-
+app.get('/', (req, res) => {
+    res.redirect('/home')
+})
 
 app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+    console.log(`Server running on ${process.env.PORT}`);
 })
 
 

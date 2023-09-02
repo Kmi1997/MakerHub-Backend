@@ -5,35 +5,38 @@ const internshipService = require("../services/internship");
 const adminController = {
 
     home: async (req, res) => {
-        try {
-            let dataChart = await internshipService.getInternship();
-
-            if (dataChart) {
-                const error = ''
-                res.status(200).render('home', { dataChart, error })
-            }
-            else {
-                const error =  "Aucune données trouvées"
-                res.status(500).render('home', { dataChart, error });
-            }
-        } catch (error) {
-            console.error(error);
-            res.status(500).render('home', { error: 'Une erreur s\'est produite' });
-        }
+        try { res.status(200).render('home'); }
+        catch (error) { res.status(500).render('error'); };
     },
 
     homeJson: async (req, res) => {
-            const dataChart = await internshipService.getInternship();
+        const dataChart = await internshipService.getInternship();
 
-            if (dataChart) {
-                console.log(dataChart)
-                res.status(200).json(dataChart); // Envoyer une réponse JSON
-            }
-            else {
-                res.status(200).json({ error: 'Aucune données trouvées' }); // Envoyer une réponse JSON avec erreur
-            }
+        if (dataChart) {
+            res.status(200).json(dataChart); // Envoyer une réponse JSON
+        }
+        else {
+            res.status(200).json({ error: 'Aucune données trouvées' }); // Envoyer une réponse JSON avec erreur
+        }
     },
 
+    viewInternships: async (req, res) => {
+
+        try{
+            const internships = await internshipService.getInternship();
+            if (internships.length > 0){
+                res.status(200).render('internships', {data : internships});
+            }
+            else{
+                res.status(404).render('internships', {data : internships});
+            }
+        }
+        catch(err){
+            res.status(500).render('error')
+        }
+
+
+    },
     addAdmin: async (req, res) => {
 
         try {

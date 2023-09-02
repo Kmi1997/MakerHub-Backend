@@ -16,7 +16,6 @@ function launchDB() {
         dialect: 'mysql',
         logging: false
     });
-
     return sequelize;
 };
 

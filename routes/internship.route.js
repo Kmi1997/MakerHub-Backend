@@ -7,7 +7,7 @@ const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware')
 
 const internshipRouter = express.Router();
 
-internshipRouter.post("/addInternship", TokenCheckerMiddleware(), bodyMiddleware(internshipSchema), internshipController.addInternship);
+internshipRouter.post("/addInternship", bodyMiddleware(internshipSchema), internshipController.addInternship);
 internshipRouter.get("/getAll", TokenCheckerMiddleware(), internshipController.getInternship);
 
 internshipRouter.get("/getOne/:id", internshipController.getOne);

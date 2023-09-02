@@ -1,0 +1,41 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: Verdana, sans-serif;
+}
+
+header {
+    height: 120px;
+    background-color: orange;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+}
+h1 {
+    padding-top: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+
+h1 > a {
+    text-decoration: none;
+    color: black;
+}
+
+.menu-horizontal {
+    list-style: none;
+    padding-top: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 200px;
+    margin-right: 200px;
+}
+
+.menu-horizontal a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+
+.menu-horizontal a:hover{
+    color: navajowhite;
+}
