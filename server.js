@@ -12,6 +12,7 @@ const internRouter = require("./routes/intern.route");
 const internshipRouter = require("./routes/internship.route");
 const adminRouter = require("./routes/admin.route");
 const paramsRouter = require('./routes/params.route');
+const {urlencoded} = require("express");
 
 
 //DB Sync
@@ -23,9 +24,10 @@ db.sequelize.sync().then(() => {
 
 
 //Globals middlewares
-app.use(cors());
-app.use(express.static('public'));
 app.use(morgan(':method :url :status - :response-time ms'));
+app.use(cors());
+app.use(urlencoded({ extended: true }));
+app.use(express.static('public'));
 app.use(express.json());
 ///////////////////////
 

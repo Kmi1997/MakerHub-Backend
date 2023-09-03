@@ -13,13 +13,31 @@
 <section>
     <br/>
     <div id="internship">
+        <% if (data.length == 0){ %>
+        <p> Il n'y a aucun stage prévu.</p>
+        <% } %>
         <% data.forEach(function(elem) { %>
         <div>
-            <%= elem.name %>
+            <% if (elem.image){ %>
+            <div> <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" alt="Image"> </div>
+            <% } %>
+            <% else { %>
+            <div> <p> Aucune illustration </p></div>
+            <% } %>
+            <div> <%= elem.name %> </div>
         </div>
-<!--        <div id="details"> <%= elem.numberPlaces %></div>-->
         <% }); %>
     </div>
 </section>
+<script>
+    function resizeImg() {
+        const img = document.querySelectorAll('img');
+        img.forEach(i => {
+            i.style.width = '100%';
+            i.style.height = '100%';
+        });
+    };
+    resizeImg();
+</script>
 </body>
 </html>

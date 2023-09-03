@@ -1,10 +1,14 @@
-const { Internship, Intern } = require("../configDb");
+const { Internship } = require("../configDb");
 const db = require("../configDb");
 
 async function addIntern(data) {
 
     //to secure creations
     const transaction = await db.sequelize.transaction();
+    const internship = await db.Internship.findByPk(data.internshipId);
+    if (!internship.activated){
+        return "Le stage n'est pas actif: l'inscription est annulée."
+    };
 
     try {
         const intern = await db.Intern.create(data, { transaction });
@@ -16,7 +20,7 @@ async function addIntern(data) {
         await transaction.rollback();
         console.log("Rollback effectué", error);
         return null;
-    }
+    };
 
 };
 
@@ -29,7 +33,7 @@ async function getAll() {
     });
 
     return allInterns;
-}
+};
 
 async function descrease(internshipId) {
     const internship = await db.Internship.findByPk(internshipId);
@@ -76,7 +80,7 @@ async function destroy(id) {
     await toDelete.destroy();
     const intern = await db.Intern.findAll();
     return intern;
-}
+};
 
 module.exports = {
     addIntern,

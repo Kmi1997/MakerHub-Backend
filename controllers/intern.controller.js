@@ -12,12 +12,13 @@ const internController = {
         const internship = await internshipService.getOne(internshipId);
 
         if (!intern) {
-            return res.status(400).json({ message: "Le stage n'est pas trouvé." });
+            return res.status(404).json({ message: "Le stage n'existe pas." });
         };
 
+        if (typeof intern === 'string') return res.status(200).json({message : intern});
         if (internship.numberAvailable <= 0) {
             return res.status(200).json({ message: "Les inscriptions ne sont plus possibles" });
-        }
+        };
 
         await internService.descrease(internshipId);
 

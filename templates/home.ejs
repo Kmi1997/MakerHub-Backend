@@ -49,9 +49,8 @@
                 myChart.resize();
             })
             .catch(error => {
-                const err = 'Erreur lors de la récupération des données JSON:' + error;
+                return 'Erreur lors de la récupération des données JSON:' + error;
             });
-
     </script>
 </section>
 </body>

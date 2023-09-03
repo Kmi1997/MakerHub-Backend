@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/addInternship.css">
+</head>
+<body>
+<header>
+    <%- include('header') %>
+</header>
+<form action="/internship/addInternship" method="post" enctype="multipart/form-data">
+    <label for="image">Image :</label>
+    <input type="file" name="image_file" id="image" accept="image/png">
+    <br>
+    <label for="name">Nom du stage*:</label>
+    <input type="text" name="name" id="name">
+    <br>
+    <label for="numberPlaces">Nombre de places*:</label>
+    <input type="number" name="numberPlaces" id="numberPlaces">
+    <br>
+    <label for="startDate">Début du stage*: </label>
+    <input type="date" name="startDate" id="startDate">
+    <br>
+    <label for="endDate">Fin du stage*: </label>
+    <input type="date" name="endDate" id="endDate">
+    <br>
+    <label for="startHour">Heure de début*: </label>
+    <input type="time" name="startHour" id="startHour">
+    <br>
+    <label for="endHour">Heure de fin*: </label>
+    <input type="time" name="endHour" id="endHour">
+    <br>
+    <label for="price">Prix/Inscription*: </label>
+    <input type="number" name="price" id="price">
+    <br>
+    <label for="fromAge">Âge à partir de *: </label>
+    <input type="number" name="fromAge" id="fromAge">
+    <br>
+    <label for="place">Lieu*: </label>
+    <input type="text" name="place" id="place">
+    <br>
+    <label for="desc">Description: </label>
+    <input type="text" name="desc" id="desc">
+    <br>
+    <input type="submit" value="Envoyer">
+</form>
+</body>
+</html>

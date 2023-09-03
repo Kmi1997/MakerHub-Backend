@@ -34,9 +34,17 @@ const adminController = {
         catch(err){
             res.status(500).render('error')
         }
-
-
     },
+
+    addNewInternship: async (req, res) => {
+        try{
+            res.status(200).render('addInternship');
+        }
+        catch(error){
+            res.status(500).render('error')
+        }
+    },
+
     addAdmin: async (req, res) => {
 
         try {

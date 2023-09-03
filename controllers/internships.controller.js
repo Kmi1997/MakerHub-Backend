@@ -4,9 +4,9 @@ const { ValidationError } = require("sequelize");
 const internshipController = {
 
     addInternship: async (req, res) => {
-
         try {
-            console.log(req.body)
+            req.body.image = req.file.buffer;
+            req.body.numberAvailable = req.body.numberPlaces;
             await internshipService.addInternship(req.body);
             res.status(201).json({ message: "Création du stage réussie" });
         }

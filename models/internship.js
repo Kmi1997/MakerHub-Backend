@@ -53,10 +53,6 @@ const InternshipModel = (sequelize) => {
                 validate: {
                     isDate: {
                         msg: "Format date attendu"
-                    },
-
-                    verifyDate() {
-                        if (this.endDate < this.startDate) throw new Error('Date invalide, elle doit être ultérieure à celle du début.');
                     }
                 },
             },
@@ -82,7 +78,7 @@ const InternshipModel = (sequelize) => {
                 allowNull: false,
             },
             image: {
-                type: DataTypes.STRING,
+                type: DataTypes.BLOB('long'),
                 allowNull: true
             },
             price: {
@@ -115,6 +111,11 @@ const InternshipModel = (sequelize) => {
             desc: {
                 type: DataTypes.STRING(100),
                 allowNull: true
+            },
+            activated: {
+                type: DataTypes.BOOLEAN,
+                allowNull : false,
+                defaultValue : false
             }
         }
     );
