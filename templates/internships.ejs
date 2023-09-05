@@ -17,19 +17,26 @@
         <p> Il n'y a aucun stage prévu.</p>
         <% } %>
         <% data.forEach(function(elem) { %>
-        <div>
+        <div id="divImg">
             <% if (elem.image){ %>
-            <div> <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" alt="Image"> </div>
-            <% } %>
-            <% else { %>
+            <div id="subDivImg">
+                <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" alt="Image">
+                <p id="edit"> Modifier </p>
+            </div>
+            <% } else { %>
             <div> <p> Aucune illustration </p></div>
             <% } %>
-            <div> <%= elem.name %> </div>
+            <div id="name"> <%= elem.name %> </div>
         </div>
         <% }); %>
     </div>
 </section>
 <script>
+    const divImg = document.querySelectorAll('[id=divImg]');
+    let subDivImg = new Array();
+    divImg.forEach(div => subDivImg.push(div.querySelector('[id=subDivImg]')));
+    console.log(subDivImg)
+
     function resizeImg() {
         const img = document.querySelectorAll('img');
         img.forEach(i => {
@@ -37,6 +44,19 @@
             i.style.height = '100%';
         });
     };
+    subDivImg.forEach(ev => ev.addEventListener('mouseover', function(){
+        let p = ev.querySelector('p');
+        let img = ev.querySelector('img');
+        p.style.visibility = 'visible';
+        img.style.visibility = 'hidden';
+    }));
+
+    subDivImg.forEach(ev => ev.addEventListener('mouseout', function(){
+        let p = ev.querySelector('p');
+        let img = ev.querySelector('img');
+        p.style.visibility = 'hidden';
+        img.style.visibility = 'visible'
+    }));
     resizeImg();
 </script>
 </body>
