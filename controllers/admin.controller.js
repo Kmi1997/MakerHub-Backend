@@ -1,6 +1,6 @@
 
 const adminService = require("../services/admin.service");
-const internshipService = require("../services/internship");
+const internshipService = require("../services/internship.service");
 
 const adminController = {
 
@@ -10,6 +10,7 @@ const adminController = {
     },
 
     homeJson: async (req, res) => {
+
         const dataChart = await internshipService.getInternship();
 
         if (dataChart) {
@@ -17,7 +18,7 @@ const adminController = {
         }
         else {
             res.status(200).json({ error: 'Aucune données trouvées' }); // Envoyer une réponse JSON avec erreur
-        }
+        };
     },
 
     viewInternships: async (req, res) => {
@@ -29,11 +30,11 @@ const adminController = {
             }
             else{
                 res.status(404).render('internships', {data : internships});
-            }
+            };
         }
         catch(err){
-            res.status(500).render('error')
-        }
+            res.status(500).render('error');
+        };
     },
 
     addNewInternship: async (req, res) => {
@@ -41,8 +42,19 @@ const adminController = {
             res.status(200).render('addInternship');
         }
         catch(error){
-            res.status(500).render('error')
+            res.status(500).render('error');
+        };
+    },
+
+    editInternship: async (req, res) => {
+        try{
+            const internship = await internshipService.getOne(req.query.id);
+            console.log(internship.activated)
+            res.status(200).render('editInternship', {data : internship });
         }
+        catch{
+            res.status(500).render('error');
+        };
     },
 
     addAdmin: async (req, res) => {

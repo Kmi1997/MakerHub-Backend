@@ -1,6 +1,6 @@
 const mail = require('../services/mail.service');
 const internService = require("../services/intern.service");
-const internshipService = require("../services/internship");
+const internshipService = require("../services/internship.service");
 
 const internController = {
 

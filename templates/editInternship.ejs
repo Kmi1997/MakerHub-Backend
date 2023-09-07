@@ -1,0 +1,93 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/editInternship.css">
+</head>
+<body>
+<header>
+    <%- include('header') %>
+</header>
+<section>
+    <h2> Modification de: <%= data.name %></h2>
+    <form action="/internship/updating?id=<%= data.id %>" method="post" enctype="multipart/form-data">
+        <div class="formDiv">
+            <div>
+                <label for="image">Image :</label>
+                <input type="file" name="image_file" id="image" accept="image/png">
+            </div>
+            <br>
+            <div>
+                <label for="name">Nom du stage*:</label>
+                <input type="text" name="name" id="name" value="<%= data.name %>">
+            </div>
+            <br>
+            <div>
+                <label for="numberPlaces">Nombre de places*:</label>
+                <input type="number" name="numberPlaces" id="numberPlaces" value="<%= data.numberPlaces %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="startDate">Début du stage*: </label>
+                <input type="date" name="startDate" id="startDate" value="<%= data.startDate %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="endDate">Fin du stage*: </label>
+                <input type="date" name="endDate" id="endDate" value="<%= data.endDate %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="activated">Activer: </label>
+                <input type="checkbox" name="activated" id="activated" value="<%= data.activated %>"/>
+            </div>
+        </div>
+        <div class="formDiv">
+            <div>
+                <label for="startHour">Heure de début*: </label>
+                <input type="time" name="startHour" id="startHour" value="<%= data.startHour %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="endHour">Heure de fin*: </label>
+                <input type="time" name="endHour" id="endHour" value="<%= data.endHour %>" />
+            </div>
+            <br>
+            <div>
+                <label for="price">Prix/Inscription*: </label>
+                <input type="number" name="price" id="price" value="<%= data.price %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="fromAge">Âge à partir de *: </label>
+                <input type="number" name="fromAge" id="fromAge" value="<%= data.fromAge %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="place">Lieu*: </label>
+                <input type="text" name="place" id="place" value="<%= data.place %>"/>
+            </div>
+            <br>
+            <div>
+                <label for="desc">Description: </label>
+                <input type="text" name="desc" id="desc" value="<%= data.desc %>" size="40"/>
+            </div>
+        </div>
+        <input id="send" type="submit" value="Valider">
+    </form>
+</section>
+<script>
+    let activated = document.getElementById("activated");
+    if (activated.value === 'true'){
+        activated.checked = true;
+    };
+    activated.addEventListener("click", function() {
+        if (activated.checked){
+            activated.value = true;
+        };
+    });
+
+</script>
+</body>
+</html>

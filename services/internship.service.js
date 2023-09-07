@@ -15,9 +15,11 @@ async function getOne(id) {
 };
 
 async function updating(req, newData) {
+    console.log(req)
     const toUpdate = await getOne(req);
     await toUpdate.update({
         name: newData.name,
+        image: newData.image,
         numberPlaces: newData.numberPlaces,
         startDate: newData.startDate,
         endDate: newData.endDate,
@@ -25,7 +27,9 @@ async function updating(req, newData) {
         endHour: newData.endHour,
         place: newData.place,
         fromAge: newData.fromAge,
-        price: newData.price
+        price: newData.price,
+        desc: newData.desc,
+        activated: newData.activated
     });
 
     await toUpdate.save();

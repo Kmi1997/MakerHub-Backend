@@ -18,25 +18,29 @@
         <% } %>
         <% data.forEach(function(elem) { %>
         <div id="divImg">
-            <% if (elem.image){ %>
             <div id="subDivImg">
-                <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" alt="Image">
+                <input id="idInternship" value="<%= elem.id %>" type="hidden"/>
+                <img src="data:image/png;base64,<%= elem.image.toString('base64') %>">
                 <p id="edit"> Modifier </p>
             </div>
-            <% } else { %>
-            <div> <p> Aucune illustration </p></div>
-            <% } %>
-            <div id="name"> <%= elem.name %> </div>
+            <div id="name">
+                <p> <%= elem.name %></p>
+                <% if (elem.activated){ %>
+                <p id="pGreen"> Actif </p>
+                <% } else { %>
+                <p id="pRed"> Désactivé </p>
+                <% } %>
+            </div>
         </div>
         <% }); %>
     </div>
 </section>
 <script>
     const divImg = document.querySelectorAll('[id=divImg]');
-    let subDivImg = new Array();
+    let subDivImg = [];
+    divImg.forEach(div => subDivImg.push(div.querySelector('[id=name]')));
     divImg.forEach(div => subDivImg.push(div.querySelector('[id=subDivImg]')));
-    console.log(subDivImg)
-
+    divImg.forEach(div => subDivImg.push(div.querySelector('[id=idInternship]')));
     function resizeImg() {
         const img = document.querySelectorAll('img');
         img.forEach(i => {
@@ -44,19 +48,36 @@
             i.style.height = '100%';
         });
     };
+
+    subDivImg.forEach(ev => ev.addEventListener('click', function(){
+        console.log('coucou')
+        let id = ev.querySelector('[id=idInternship]');
+        console.log(id);
+        window.location.href = "/internships/editInternship?id="+id.value;
+    }));
+
     subDivImg.forEach(ev => ev.addEventListener('mouseover', function(){
         let p = ev.querySelector('p');
+        if (p.id === 'edit'){
+            p.style.visibility = 'visible';
+        };
         let img = ev.querySelector('img');
-        p.style.visibility = 'visible';
-        img.style.visibility = 'hidden';
+        if (img){
+            img.style.visibility = 'hidden';
+        };
     }));
 
     subDivImg.forEach(ev => ev.addEventListener('mouseout', function(){
         let p = ev.querySelector('p');
+        if (p.id === 'edit'){
+            p.style.visibility = 'hidden';
+        };
         let img = ev.querySelector('img');
-        p.style.visibility = 'hidden';
-        img.style.visibility = 'visible'
+        if (img){
+            img.style.visibility = 'visible';
+        };
     }));
+
     resizeImg();
 </script>
 </body>

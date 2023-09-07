@@ -9,6 +9,7 @@ adminRouter.post("/addAdmin", TokenCheckerMiddleware(), bodyMiddleware(adminSche
 adminRouter.get('/home', adminController.home);
 adminRouter.get('/homeJson', adminController.homeJson);
 adminRouter.get('/internships', adminController.viewInternships);
+adminRouter.get('/internships/editInternship', adminController.editInternship);
 adminRouter.get("/internships/addnewinternship", adminController.addNewInternship);
 adminRouter.post("/testConnection", adminController.testConnection);
 adminRouter.get("/getThisAdmin", TokenCheckerMiddleware(), adminController.getThisAdmin);

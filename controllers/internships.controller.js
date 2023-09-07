@@ -1,9 +1,12 @@
-const internshipService = require("../services/internship");
+const internshipService = require("../services/internship.service");
 const { ValidationError } = require("sequelize");
 
 const internshipController = {
 
     addInternship: async (req, res) => {
+        if (req.file.buffer === undefined){
+            req.file.buffer = null;
+        };
         try {
             req.body.image = req.file.buffer;
             req.body.numberAvailable = req.body.numberPlaces;
@@ -11,7 +14,7 @@ const internshipController = {
             res.status(201).json({ message: "Création du stage réussie" });
         }
         catch (error) {
-            if (error instanceof ValidationError) return res.status(400).json({ message: error.message, data: error });
+            if (error instanceof ValidationError) return res.status(400).render({ message: error.message, data: error });
             res.status(500).json({ error: error.message });
         };
     },
@@ -47,20 +50,31 @@ const internshipController = {
     },
 
     updating: async (req, res) => {
+
+        if (req.file){
+            req.body.image = req.file.buffer
+        }
+        else{
+            req.body.image = '';
+        };
+
+        if (!req.body.activated){
+            req.body.activated = false;
+        };
+
         try {
-            const params = req.params.id;
-            await internshipService.updating(params, req.body);
-            res.status(201).json({ message: "Stage mis à jour" });
+        const params = req.query.id;
+        await internshipService.updating(params, req.body);
+        res.status(201).json({ message: "Stage mis à jour" });
         }
         catch (err) {
             res.status(422).json({ message: "Erreur de données" });
-        }
+        };
     },
 
     destroy: async (req, res) => {
         try {
             const params = req.params.id;
-            console.log(params);
             const results = await internshipService.destroy(params);
             res.status(200).json({ message: "Stage supprimé.", results });
         }
