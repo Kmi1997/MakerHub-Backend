@@ -48,3 +48,23 @@
 #pRed {
     color: red;
 }
+
+#addInternship {
+    background-color: orange;
+    opacity: 60%;
+    text-align: center;
+    height: 30px;
+    vertical-align: center;
+}
+
+h4 {
+    padding-top: 5px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: whitesmoke;
+}

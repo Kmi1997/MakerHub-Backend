@@ -11,6 +11,7 @@
     <%- include('header') %>
 </header>
 <section>
+    <div id="addInternship">  <h4> <a href="/internships/addnewinternship"> Ajouter un stage </a></h4> </div>
     <br/>
     <div id="internship">
         <% if (data.length == 0){ %>
@@ -20,7 +21,11 @@
         <div id="divImg">
             <div id="subDivImg">
                 <input id="idInternship" value="<%= elem.id %>" type="hidden"/>
+                <% if (elem.image){ %>
                 <img src="data:image/png;base64,<%= elem.image.toString('base64') %>">
+                <% } else { %>
+                <img>
+                <% } %>
                 <p id="edit"> Modifier </p>
             </div>
             <div id="name">

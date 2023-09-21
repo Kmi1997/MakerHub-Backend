@@ -20,6 +20,8 @@
             .then(dataJson => {
                 let labels = dataJson.map(x => x.name);
                 let numberAvailable = dataJson.map(x => x.numberPlaces - x.numberAvailable)
+                let maxNumbers = dataJson.map(x => x.numberPlaces);
+                const maxNumber = Math.max(...maxNumbers);
                 const canvas = document.getElementById('myHomeChart').getContext('2d');
                 const myChart = new Chart(canvas, {
                     type: 'bar',
@@ -37,11 +39,15 @@
                         scales: {
                             y: {
                                 beginAtZero: true,
+                                ticks: {
+                                    stepSize: 5,
+                                    precision: 0
+                                },
                                 title: {
                                     display: true,
                                     text: 'Nombre d\'inscriptions'
                                 },
-                                max: 30
+                                max: maxNumber
                             }
                         }
                     }
