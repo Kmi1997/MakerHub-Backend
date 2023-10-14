@@ -31,9 +31,6 @@ async function connection(data) {
                 expiresIn: process.env.JWT_EXPIRY
             });
             return token;
-        }
-        else if (!res) {
-            return res;
         };
     };
 };

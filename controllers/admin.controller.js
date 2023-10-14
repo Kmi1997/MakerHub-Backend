@@ -6,7 +6,7 @@ const adminController = {
 
     home: async (req, res) => {
         try { res.status(200).render('home'); }
-        catch (error) { res.status(500).render('error'); };
+        catch (error) { res.status(500).render('error') }
     },
 
     homeJson: async (req, res) => {
@@ -18,7 +18,7 @@ const adminController = {
         }
         else {
             res.status(200).json({ error: 'Aucune données trouvées' }); // Envoyer une réponse JSON avec erreur
-        };
+        }
     },
 
     viewInternships: async (req, res) => {
@@ -30,11 +30,11 @@ const adminController = {
             }
             else{
                 res.status(404).render('internships', {data : internships});
-            };
+            }
         }
         catch(err){
             res.status(500).render('error');
-        };
+        }
     },
 
     addNewInternship: async (req, res) => {
@@ -43,7 +43,7 @@ const adminController = {
         }
         catch(error){
             res.status(500).render('error');
-        };
+        }
     },
 
     editInternship: async (req, res) => {
@@ -54,7 +54,7 @@ const adminController = {
         }
         catch{
             res.status(500).render('error');
-        };
+        }
     },
 
     addAdmin: async (req, res) => {
@@ -65,21 +65,25 @@ const adminController = {
         }
         catch (error) {
             res.status(500).json({ error: error.message });
-        };
+        }
+    },
+
+    connection: async (req, res) => {
+
+        try { res.status(200).render('connection', { error : null}) }
+        catch(err) { res.status(500).render('error') }
     },
 
     testConnection: async (req, res) => {
 
-
         const token = await adminService.connection(req.body);
 
         if (token) {
-            res.status(201).json({ token: token });
+            res.status(201).render('home', { token: token });
         }
         else {
-            res.status(401).json({ message: "Utilisateur inexistant ou mot de passe incorrect" });
-        };
-
+            res.status(401).render('connection', { error: "Utilisateur inexistant ou mot de passe incorrect." });
+        }
     },
 
     getThisAdmin: async (req, res) => {

@@ -16,7 +16,7 @@ function TokenCheckerMiddleware() {
             });
         }
         else {
-            return res.status(401).send({ message: "Pas de tokens." });
+            return res.status(401).render('connection', { error: null });
         };
     };
 }

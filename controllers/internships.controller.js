@@ -61,10 +61,10 @@ const internshipController = {
         try {
         const params = req.query.id;
         await internshipService.updating(params, req.body);
-        res.status(201).render('finishedOperation', { response: "Stage mis à jour" });
+        res.status(201).render('finishedOperation', { response: "Stage mis à jour avec succès" });
         }
         catch (err) {
-            res.status(422).render('finishedOperation', { response: "Erreur de données" });
+            res.status(500).render('finishedOperation', { response: "Erreur interne du serveur" });
         };
     },
 

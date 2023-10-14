@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/connection.css">
+</head>
+<body>
+<header>
+    <%- include('headerConnection') %>
+</header>
+<h2> Connexion </h2>
+<section>
+    <section>
+        <form action="/testConnection" method="post">
+            <div class="formDiv">
+                <div>
+                    <label for="username">Nom d'utilisateur </label>
+                    <input type="text" name="username" id="username">
+                </div>
+                <br>
+                <div>
+                    <label for="password">Mot de passe </label>
+                    <input type="password" name="password" id="password">
+                </div>
+                <br>
+                <% if (error){ %>
+                <div>
+                    <p> <%= error %> </p>
+                    <% }%>
+                </div>
+                <input id="send" type="submit" value="Se connecter">
+            </div>
+        </form>
+    </section>
+</section>
+</body>
+</html>
