@@ -13,8 +13,8 @@ const adminModel = (sequelize) => {
 
         superRoot: {
             type: DataTypes.BOOLEAN,
-            allowNull: false,
-            default: false
+            allowNull: true,
+            defaultValue: false
         }
     });
 

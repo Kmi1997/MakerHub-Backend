@@ -4,10 +4,9 @@ const jwt = require('jsonwebtoken');
 function TokenCheckerMiddleware() {
 
     return function TokenChecker(req, res, next) {
-        if (req.headers.authorization) {
-            const token = req.headers.authorization.replace("Bearer ", "");
-
-            jwt.verify(token, process.env.JWT_SECRET, {
+        if (req.cookies.jwt_token) {
+            // const token = req.headers.authorization.replace("Bearer ", "");
+            jwt.verify(req.cookies.jwt_token, process.env.JWT_SECRET, {
                 ignoreExpiration: false
             }, (error, decoded) => {
                 if (error) return res.status(401).json({ error: "Unauthorized access" });
