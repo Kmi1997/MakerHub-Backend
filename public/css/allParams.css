@@ -10,14 +10,13 @@ form {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 }
 
 .formDiv {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
 }
 
 .formDiv div {

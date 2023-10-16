@@ -59,9 +59,9 @@ const internshipController = {
         };
 
         try {
-        const params = req.query.id;
-        await internshipService.updating(params, req.body);
-        res.status(201).render('finishedOperation', { response: "Stage mis à jour avec succès" });
+            console.log(" là " + req.query.id)
+            await internshipService.updating(req.query.id, req.body);
+            res.status(201).render('finishedOperation', { response: "Stage mis à jour avec succès" });
         }
         catch (err) {
             res.status(500).render('finishedOperation', { response: "Erreur interne du serveur" });
