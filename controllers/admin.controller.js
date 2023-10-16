@@ -1,6 +1,7 @@
 
 const adminService = require("../services/admin.service");
 const internshipService = require("../services/internship.service");
+const {all} = require("express/lib/application");
 
 const adminController = {
 
@@ -32,43 +33,40 @@ const adminController = {
                 res.status(404).render('internships', {data : internships});
             }
         }
-        catch(err){
-            res.status(500).render('error');
-        }
+        catch(err){ res.status(500).render('error'); }
     },
 
     addNewInternship: async (req, res) => {
         try{
-            res.status(200).render('addInternship');
+            res.status(200).render('addInternship', { errors : null});
         }
-        catch(error){
-            res.status(500).render('error');
-        }
+        catch(error){ res.status(500).render('error'); }
     },
 
     editInternship: async (req, res) => {
         try{
             const internship = await internshipService.getOne(req.query.id);
-            console.log(internship.activated)
-            res.status(200).render('editInternship', {data : internship });
+            res.status(200).render('editInternship', {data : internship, errors : null });
         }
-        catch{
-            res.status(500).render('error');
-        }
+        catch{ res.status(500).render('error') }
     },
 
     addAdmin: async (req, res) => {
 
         try {
-            await adminService.addAdmin(req.body);
-            res.status(201).json({ message: "Administrateur créé" });
+            const newUser = await adminService.addAdmin(req.body);
+            res.status(201).render('finishedOperation', { response: newUser });
         }
         catch (error) {
-            res.status(500).json({ error: error.message });
+            res.status(500).render('error', { error: "Erreur interne.." });
         }
     },
 
     connection: async (req, res) => {
+
+        if (req.query.param == 'delete_cookie') {
+            res.clearCookie('jwt_token');
+        }
 
         try { res.status(200).render('connection', { error : null}) }
         catch(err) { res.status(500).render('error') }
@@ -79,7 +77,7 @@ const adminController = {
         const token = await adminService.connection(req.body);
 
         if (token) {
-            res.status(201).render('home', { token: token });
+            res.status(201).cookie('jwt_token', token, {maxAge:3600000, httpOnly: true}).render('home');
         }
         else {
             res.status(401).render('connection', { error: "Utilisateur inexistant ou mot de passe incorrect." });
@@ -95,15 +93,6 @@ const adminController = {
         catch (error) {
             console.log(error);
         }
-    },
-
-    getAll: async (req, res) => {
-
-        const allAdmins = await adminService.getAll();
-
-        if (allAdmins) return res.status(200).json(allAdmins);
-
-        return res.status(404).json({ message: "Ressource introuvable" });
     },
 
     update: async (req, res) => {
@@ -126,6 +115,11 @@ const adminController = {
         catch (err) {
             res.status(404).json({ message: "Administrateur introuvable" });
         }
+    },
+
+    allParams: async (req, res) => {
+        const allAdmins = await adminService.getAll();
+        res.status(200).render('allParams', { data: allAdmins, errors : null});
     }
 };
 
