@@ -17,7 +17,7 @@ const {urlencoded} = require("express");
 
 
 //DB Sync
-db.sequelize.sync().then(() => {
+db.sequelize.sync({force:true}).then(() => {
     console.log("DB sync ok");
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'templates'));
