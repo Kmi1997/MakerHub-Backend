@@ -16,7 +16,7 @@ const cookieParser = require('cookie-parser');
 
 
 //DB Sync
-db.sequelize.sync({force:true}).then(() => {
+db.sequelize.sync().then(() => {
     console.log("DB sync ok");
     app.set('view engine', 'ejs');
     app.set('views', path.join(__dirname, 'templates'));
