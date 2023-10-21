@@ -14,7 +14,7 @@ const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
 
-
+console.log(process.env.DB_HOST)
 //DB Sync
 db.sequelize.sync().then(() => {
     console.log("DB sync ok");
