@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/allParams.css">
+</head>
+<body>
+<header>
+    <%- include('header') %>
+</header>
+<section>
+    <% if (errors){ %>
+    <div id="errors" style="display: none;"> <%= errors %> </div>
+    <% } %>
+    <h2> Ajouter un utilisateur </h2>
+    <form action="/addAdmin" method="post">
+        <div class="formDiv">
+            <div>
+                <label for="username">Nom d'utilisateur: </label>
+                <input type="text" name="username" id="username">
+            </div>
+            <br>
+            <div>
+                <label for="password">Mot de passe:</label>
+                <input type="password" name="password" id="password">
+            </div>
+            <br>
+            <div>
+                <label for="superRoot">Administrateur:</label>
+                <input type="checkbox" name="superRoot" id="superRoot"/>
+            </div>
+            <br>
+        </div>
+        <input id="send" type="submit" value="Valider">
+    </form>
+</section>
+<script src="/createErrors.js"></script>
+<script>
+    createErrors();
+    let activated = document.getElementById("superRoot");
+    if (activated.value === 'true'){
+        activated.checked = true;
+    }
+    activated.addEventListener("click", function() {
+        if (activated.checked){
+            activated.value = true;
+        }
+    });
+</script>
+</body>
+</html>

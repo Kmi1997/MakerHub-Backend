@@ -9,10 +9,13 @@ const jwt = require("jsonwebtoken");
 async function addAdmin(data) {
 
     const saltRounds = 10;
-
+    console.log(data.superRoot)
     data.password = await bcrypt.hash(data.password, saltRounds);
     await db.Admin.create(data);
-
+    if (data.superRoot) {
+        return "L'administrateur " + data.username + " est créé!";
+    }
+    return "L'utilisateur " + data.username + " est créé!";
 };
 
 
@@ -38,9 +41,7 @@ async function connection(data) {
 //decode token and search this id in DB.
 async function getThisAdmin(token) {
 
-    token = token.replace('Bearer ', "");
     const decoded = jwt.decode(token);
-
     return db.Admin.findByPk(decoded.id, { attributes: ['username', "superRoot"] });
 }
 
