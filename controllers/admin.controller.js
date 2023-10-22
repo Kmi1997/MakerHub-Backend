@@ -1,7 +1,6 @@
 
 const adminService = require("../services/admin.service");
 const internshipService = require("../services/internship.service");
-const {all} = require("express/lib/application");
 
 const adminController = {
 

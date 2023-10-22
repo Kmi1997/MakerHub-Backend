@@ -10,6 +10,7 @@ const morgan = require("morgan");
 const db = require("./configDb");
 const internRouter = require("./routes/intern.route");
 const internshipRouter = require("./routes/internship.route");
+const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
@@ -33,11 +34,12 @@ app.use(cookieParser());
 
 
 //Main urls
+app.use("/admin", adminRouter)
 app.use("/registration", internRouter);
 app.use("/internship", internshipRouter);
-app.use("/", adminRouter);
+app.use("/public", publicRouter);
 app.get('/', (req, res) => {
-    res.redirect('/home')
+    res.redirect('/public/home')
 })
 
 
