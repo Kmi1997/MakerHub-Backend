@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function() {
             fetch('/public/sendUrl').then(
                 res => res.json()).then(data => {
                     console.log(data.url)
-                    window.location.href = `${data.url}public/menu`;
+                    window.location.href = `${data.url}menu`;
                 }
             ).catch(error => console.log(error));
         }
