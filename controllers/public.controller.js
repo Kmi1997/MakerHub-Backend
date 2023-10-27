@@ -24,6 +24,11 @@ const publicController = {
 
         try{
             const internships = await publicService.getInternship();
+            internships.forEach(elem => {
+                if (elem.dataValues.image) {
+                    elem.image = elem.image.toString('base64');
+                }
+            });
             if (internships.length > 0){
                 res.status(200).json({internships});
             }

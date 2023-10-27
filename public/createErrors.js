@@ -1,6 +1,5 @@
 
 function createErrors() {
-    try {
         const errors = document.getElementById('errors');
         if (errors) {
             const div = document.createElement('div');
@@ -16,6 +15,4 @@ function createErrors() {
                 document.body.appendChild(div);
             });
         }
-    }
-    catch(err) {}
 }

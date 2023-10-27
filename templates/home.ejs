@@ -15,7 +15,7 @@
     <div id="chart"> <canvas id="myHomeChart"></canvas> </div>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        fetch('/homeJson')
+        fetch('/admin/homeJson')
             .then(data => data.json())
             .then(dataJson => {
                 let labels = dataJson.map(x => x.name);
