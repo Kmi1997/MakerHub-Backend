@@ -1,7 +1,10 @@
 const db = require("../configDb");
 
 async function getInternship() {
-    const internship = await db.Internship.findAll({attributes: { exclude: ["activated"]}});
+    const internship = await db.Internship.findAll({
+        where: { activated : true }
+    });
+    console.log(internship)
     return internship;
 };
 

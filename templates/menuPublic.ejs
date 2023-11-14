@@ -14,7 +14,26 @@
     </div>
 </header>
 <section>
+    <div id="internship">
+        <% if (data.length == 0){ %>
+        <p> Il n'y a aucun stage prévu.</p>
+        <% } %>
+        <% data.forEach(function(elem) { %>
+        <div id="divImg">
+            <div id="subDivImg">
+                <input id="idInternship" value="<%= elem.id %>" type="hidden"/>
+                <% if (elem.image){ %>
+                <img src="data:image/png;base64,<%= elem.image.toString('base64') %>">
+                <% } else { %>
+                <img>
+                <% } %>
+            </div>
+            <div id="name">
+                <p> <%= elem.name %></p>
+            </div>
+        </div>
+        <% }); %>
+    </div>
 </section>
-<script src="/flux.js"></script>
 </body>
 </html>

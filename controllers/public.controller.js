@@ -11,17 +11,6 @@ const publicController = {
     },
 
     menu: async (req, res) => {
-        try { res.status(200).render('menuPublic'); }
-        catch (error) { res.status(500).render('error') }
-    },
-
-    sendUrl: async (req, res) => {
-        try { res.status(200).json({url : process.env.URL.toString()})}
-        catch (error) { res.status(500).json({url: null})}
-    },
-
-    sendInternships: async (req, res) => {
-
         try{
             const internships = await publicService.getInternship();
             internships.forEach(elem => {
@@ -29,15 +18,16 @@ const publicController = {
                     elem.image = elem.image.toString('base64');
                 }
             });
-            if (internships.length > 0){
-                res.status(200).json({internships});
-            }
-            else{
-                res.status(404).json({internships});
-            }
+            res.status(200).render('menuPublic', {data : internships});
         }
         catch(err){ res.status(500).render('error'); }
     },
+
+    sendUrl: async (req, res) => {
+        try { res.status(200).json({url : process.env.URL.toString()})}
+        catch (error) { res.status(500).json({url: null})}
+    },
+
 }
 
 module.exports = publicController;
