@@ -1,6 +1,10 @@
-require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`
-});
+try {
+    require("dotenv").config({
+        path: `.env.${process.env.NODE_ENV}`
+    });
+} catch (error) {
+    console.error("Erreur lors de la configuration dotenv:", error);
+}
 
 const path = require('path');
 const express = require("express");
