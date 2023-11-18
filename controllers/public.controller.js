@@ -10,7 +10,7 @@ const publicController = {
         catch (error) { res.status(500).render('error') }
     },
 
-    menu: async (req, res) => {
+    internships: async (req, res) => {
         try{
             const internships = await publicService.getInternship();
             internships.forEach(elem => {
@@ -18,15 +18,14 @@ const publicController = {
                     elem.image = elem.image.toString('base64');
                 }
             });
-            res.status(200).render('menuPublic', {data : internships});
+            res.status(200).render('internshipsPublic', {data : internships});
         }
         catch(err){ res.status(500).render('error'); }
     },
 
-    sendUrl: async (req, res) => {
-        try { res.status(200).json({url : process.env.URL.toString()})}
-        catch (error) { res.status(500).json({url: null})}
-    },
+    contact: async (req, res) => {
+        res.status(200).render('contact');
+    }
 
 }
 

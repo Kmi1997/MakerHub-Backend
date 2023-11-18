@@ -1,30 +1,48 @@
-@import url("https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900");
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Poppins", sans-serif;
 }
 
 body {
-    display: flex;
-    background: #c2c0c0;
     min-height: 100vh;
-    align-items: center;
-    justify-content: center;
+    overflow: hidden; /* Évitez le défilement vertical */
+}
+
+header{
+    font-family: "Poppins", sans-serif;
+    display: flex;
+}
+
+.navbar-nav .nav-item:hover .nav-link {
+    color: whitesmoke;
+}
+
+#nav {
+    flex: 2;
+}
+
+.content{
+    flex: 1;
 }
 
 .content {
-    position: relative;
+    padding: 10px;
+    margin-right: 10px;
+}
+
+.content {
     white-space: nowrap;
+    position: relative; /* Permet le positionnement relatif pour les éléments enfants absolus */
 }
 
 .content h1 {
     color: #fff;
-    font-size: 8em;
+    font-size: 3em;
     position: absolute;
-    transform: translate(-50%, -50%);
+    top: 0; /* Positionnez en haut */
+    left: 0; /* Positionnez à gauche */
+    transform: translate(20%, 20%); /* Ajustez le décalage */
 }
 
 .content h1:nth-child(1) {
@@ -33,13 +51,12 @@ body {
 }
 
 .content h1:nth-child(2) {
-    color: #ffcd21;
+    color: orange;
     animation: animate 4s ease-in-out infinite;
 }
 
 @keyframes animate {
-    0%,
-    100% {
+    0%, 100% {
         clip-path: polygon(
                 0% 45%,
                 16% 44%,
@@ -67,4 +84,3 @@ body {
         );
     }
 }
-

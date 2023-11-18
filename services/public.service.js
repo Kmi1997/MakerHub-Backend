@@ -4,7 +4,6 @@ async function getInternship() {
     const internship = await db.Internship.findAll({
         where: { activated : true }
     });
-    console.log(internship)
     return internship;
 };
 

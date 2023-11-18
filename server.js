@@ -32,6 +32,7 @@ app.use(cors());
 app.use(morgan(':method :url :status - :response-time ms'))
 app.use(urlencoded({ extended: true }));
 app.use('/', express.static('public'));
+app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.json());
 app.use(cookieParser());
 ///////////////////////
