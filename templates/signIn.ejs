@@ -1,0 +1,83 @@
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/signIn.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+</head>
+<body>
+<%- include('homePublic') %>
+<section>
+    <% if (errors){ %>
+    <div id="errors" style="display: none;"> <%= errors %> </div>
+    <% } %>
+    <% if (data){ %>
+    <br>
+    <h2>Inscription : <%= data.name %></h2>
+    <br>
+    <form action="/registration/addIntern" method="post" enctype="application/json">
+        <div class="form-group col-lg-3 col-md-4 col-sm-6">
+            <label for="childName">Prénom de l'enfant:</label>
+            <input type="text" class="form-control" name="childName" id="childName">
+        </div>
+        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+            <label for="age">Âge:</label>
+            <input type="number" class="form-control" name="age" id="age" min="<%= data.fromAge %>"/>
+        </div>
+        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+            <label for="parentName">Nom d'un parent:</label>
+            <input type="text" class="form-control" name="parentName" id="parentName"/>
+        </div>
+        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+            <label for="parentPhone">GSM:</label>
+            <input type="tel" class="form-control" name="parentPhone" id="parentPhone"/>
+        </div>
+        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+            <label for="mail">Adresse mail:</label>
+            <input type="email" class="form-control" name="mail" id="mail"/>
+        </div>
+        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+            <label for="internshipId"></label>
+            <input type="hidden" name="internshipId" id="internshipId" value="<%= data.id %>"/>
+        </div>
+        <button type="submit" class="btn btn-warning">Valider</button>
+    </form>
+    <div id="desc"> <%= data.desc %> </div>
+    <% } %>
+</section>
+
+<script src="/createErrors.js"></script>
+<script>
+    createErrors();
+    const form = document.querySelector('form');
+    form.addEventListener('submit', () => {
+        const formValues = {
+            "childName": document.getElementById('childName').value,
+            "parentName": document.getElementById('parentName').value,
+            "parentPhone": document.getElementById('parentPhone').value,
+            "age": document.getElementById('age').value,
+            "mail": document.getElementById('mail').value,
+            "internshipId": document.getElementById('internshipId').value
+        };
+        sessionStorage.setItem('values', JSON.stringify(formValues));
+    });
+
+    if (document.getElementById('errors')) {
+        const values = JSON.parse(sessionStorage.getItem('values'));
+        document.getElementById('childName').value = values.childName;
+        document.getElementById('parentName').value = values.parentName;
+        document.getElementById('mail').value = values.mail;
+        document.getElementById('parentPhone').value = values.parentPhone;
+        document.getElementById('age').value = values.age;
+        document.getElementById('internshipId').value;
+    }
+
+    const age = document.getElementById('age');
+    age.addEventListener('input', () => {
+        if (parseInt(age.value) < parseInt(age.getAttribute('min'))) age.value = age.getAttribute('min');
+    });
+
+</script>
+</body>
+</html>

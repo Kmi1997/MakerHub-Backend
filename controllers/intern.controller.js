@@ -5,28 +5,16 @@ const internshipService = require("../services/internship.service");
 const internController = {
 
     addIntern: async (req, res) => {
-        console.log(req.body)
-        const intern = await internService.addIntern(req.body);
-        console.log(req.body)
-        const internshipId = req.body.internshipId;
-        const internship = await internshipService.getOne(internshipId);
-
-        if (!intern) {
-            return res.status(404).json({ message: "Le stage n'existe pas." });
-        };
-
-        if (typeof intern === 'string') return res.status(200).json({message : intern});
-        if (internship.numberAvailable <= 0) {
-            return res.status(200).json({ message: "Les inscriptions ne sont plus possibles" });
-        };
-
-        await internService.descrease(internshipId);
-
-        //to send the mail with the personalized data
-        // mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
-
-        res.location('intern/' + intern.id);
-        res.status(201).json({ message: "Inscription validée!" });
+        try {
+            await internService.addIntern(req.body);
+            const internshipId = req.body.internshipId;
+            const internship = await internshipService.getOne(internshipId);
+            await internService.descrease(internshipId);
+            //to send the mail with the personalized data
+            // mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
+            res.status(201).render('finishedOperationPublic', { response: "Inscription validée. Un mail reprenant les informations du stage vous sera envoyé." });
+        }
+        catch(error) {res.status(500).render('error')}
     },
 
     getAll: async (req, res) => {

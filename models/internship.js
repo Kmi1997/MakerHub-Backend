@@ -44,9 +44,10 @@ const InternshipModel = (sequelize) => {
                     isAfter: {
                         args: new Date().toDateString(),
                         msg: "Date minimum -> J+1"
-                    },
+                    }
                 }
             },
+
             endDate: {
                 type: DataTypes.DATEONLY,
                 allowNull: false,

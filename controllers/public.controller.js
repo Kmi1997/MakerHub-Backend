@@ -14,7 +14,7 @@ const publicController = {
         try{
             const internships = await publicService.getInternship();
             internships.forEach(elem => {
-                if (elem.dataValues.image) {
+                if (elem.image) {
                     elem.image = elem.image.toString('base64');
                 }
             });
@@ -25,8 +25,15 @@ const publicController = {
 
     contact: async (req, res) => {
         res.status(200).render('contact');
-    }
+    },
 
+    signIn: async (req, res) => {
+        try{
+            const internship = await publicService.getOneInternship(req.query.internshipId);
+            res.status(200).render('signIn', {data : internship,  errors : null});
+        }
+        catch(err){ res.status(404).render('signIn', {errors : "Le stage n'existe pas.."}); }
+    }
 }
 
 module.exports = publicController;
