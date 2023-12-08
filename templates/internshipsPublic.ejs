@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/internshipsPublic.css">
     <title>s'Cool Family</title>
@@ -10,14 +11,16 @@
 <body>
 <%- include('homePublic') %>
 <section>
+    <% if (data.length == 0){ %>
+    <p> Il n'y a aucun stage prévu.</p>
+    <% } else { %>
+    <% data.forEach(function(elem, index) { %>
     <div id="internship">
-        <% if (data.length == 0){ %>
-        <p> Il n'y a aucun stage prévu.</p>
-        <% } else { %>
-        <% data.forEach(function(elem) { %>
         <div class="card" style="width: 18rem;">
             <div class="card-body">
-                <h5 class="card-title"><%= elem.name %></h5>
+                <div id="title">
+                    <h5 class="card-title"><%= elem.name %></h5>
+                </div>
                 <% if (elem.image) { %>
                 <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" class="card-img-top" alt="Illustration du stage">
                 <% } else { %>
@@ -32,7 +35,10 @@
                     </li>
                     <li class="list-group-item"><strong>À partir de</strong> <%= elem.fromAge %> ans</li>
                     <li class="list-group-item"><%= elem.numberAvailable %> places disponibles </li>
-                    <li class="list-group-item"><strong>Où</strong> ? <%= elem.place %></li>
+                    <li class="list-group-item"><strong>Où</strong> ?
+                        <input type="button" style="color: darkgoldenrod;" class="map" value="<%= elem.place %>">
+                        <input type="hidden" class="map" value="<%= index %>, <%= elem.geo.lat %>, <%= elem.geo.lon %>">
+                    </li>
                     <li class="list-group-item"><strong>Quand ? </strong> Du <%= new Date(elem.startDate).toLocaleDateString('fr-FR') %>
                         au <%= new Date(elem.endDate).toLocaleDateString('fr-FR') %>
                     </li>
@@ -42,9 +48,41 @@
                 </ul>
             </div>
         </div>
-        <% }); %>
-        <% } %>
     </div>
+    <% }); %>
+    <% } %>
 </section>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script>
+    let allMaps = document.querySelectorAll('.map');
+
+    allMaps.forEach(elem => {
+
+        elem.addEventListener('click', function() {
+            let nextDivHidden = elem.nextElementSibling;
+            let isDivAlreadyExist = document.getElementById(elem.value + nextDivHidden.value);
+
+            if (!isDivAlreadyExist && nextDivHidden.value != undefined) {
+
+                const [index, lat, lon] = nextDivHidden.value.toString().split(', ');
+                let mapDiv = document.createElement('div');
+                mapDiv.style.height = '30vh';
+                mapDiv.setAttribute('id', elem.value + index);
+                elem.insertAdjacentElement('afterend', mapDiv);
+                let myLatLng = [lat, lon];
+                let map = L.map(mapDiv).setView(myLatLng, 10);
+
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; OpenStreetMap contributors'
+                }).addTo(map);
+
+                L.marker(myLatLng).addTo(map)
+                    .bindPopup('Hello World!');
+
+            }
+        });
+    });
+
+</script>
 </body>
 </html>

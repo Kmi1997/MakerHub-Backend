@@ -44,7 +44,7 @@ app.use("/registration", internRouter);
 app.use("/internship", internshipRouter);
 app.use("/public", publicRouter);
 app.get('/', (req, res) => {
-    res.redirect('/public/home')
+    res.redirect('/public/stages')
 })
 
 
