@@ -23,7 +23,7 @@ const publicController = {
                     elem.geo = await elem.geo.json();
                     elem.geo = {lat: elem.geo[0].lat, lon: elem.geo[0].lon}
                 }
-                catch(error) { elem.geo = error }
+                catch(error) { elem.geo = null }
             }));
                 console.log(internships[0].geo)
             res.status(200).render('internshipsPublic', {data : internships});

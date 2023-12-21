@@ -29,3 +29,11 @@ section {
     height: 50vh;
     margin: 5vh auto;
 }
+
+@media (max-width: 767px) {
+
+   .card{
+       margin-bottom: 30px;
+   }
+
+}

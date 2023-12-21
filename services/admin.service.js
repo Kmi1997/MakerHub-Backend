@@ -31,7 +31,7 @@ async function connection(data) {
 
             const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
                 algorithm: "HS256",
-                expiresIn: process.env.JWT_EXPIRY
+                expiresIn: parseInt(process.env.JWT_EXPIRY, 10)
             });
             return token;
         };
