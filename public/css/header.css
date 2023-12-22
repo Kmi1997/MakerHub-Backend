@@ -30,8 +30,8 @@ h1 > a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-left: 200px;
-    margin-right: 200px;
+    margin-left: 10%;
+    margin-right: 10%;
 }
 
 .menu-horizontal a {
@@ -42,4 +42,41 @@ h1 > a {
 
 .menu-horizontal a:hover{
     color: navajowhite;
+}
+
+#burger {
+    display: none;
+}
+
+@media (max-width: 767px) {
+
+    header {
+        height: 80px;
+    }
+
+    .menu-horizontal {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        left: -10%;
+        background-color: orange;
+        width: 50%;
+        padding: 20px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        z-index: 2000;
+    }
+
+    .menu-horizontal.show {
+        display: flex;
+    }
+
+    .menu-horizontal li {
+        margin: 10px 0;
+    }
+
+    #burger{
+        display: block;
+        margin-left: 5%;
+    }
+
 }

@@ -6,13 +6,13 @@ const internController = {
 
     addIntern: async (req, res) => {
         try {
+            req.body.paid = false;
             await internService.addIntern(req.body);
             const internshipId = req.body.internshipId;
             const internship = await internshipService.getOne(internshipId);
             await internService.descrease(internshipId);
-            //to send the mail with the personalized data
-            // mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
             res.status(201).render('finishedOperationPublic', { response: "Inscription validée. Un mail reprenant les informations du stage vous sera envoyé." });
+            await mail(req.body.mail, internship.name.toLowerCase(), req.body.childName, internship.price);
         }
         catch(error) {res.status(500).render('error')}
     },

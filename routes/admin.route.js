@@ -18,7 +18,6 @@ adminRouter.get("/internships/addnewinternship", TokenCheckerMiddleware(), admin
 adminRouter.post("/testConnection", adminController.testConnection);
 adminRouter.get("/connection", adminController.connection);
 adminRouter.get("/getThisAdmin", TokenCheckerMiddleware(), adminController.getThisAdmin);
-adminRouter.patch("/update/:id", TokenCheckerMiddleware(), adminController.update);
-adminRouter.delete("/delete/:id", TokenCheckerMiddleware(), adminController.destroy);
-
+adminRouter.post("/addAdmin", TokenCheckerMiddleware(), bodyMiddleware(adminSchema,'allParams'), adminController.addAdmin);
+adminRouter.get("/interns", TokenCheckerMiddleware(), adminController.viewInterns);
 module.exports = adminRouter;

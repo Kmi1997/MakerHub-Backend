@@ -9,6 +9,7 @@ form{
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .formDiv{
@@ -33,3 +34,4 @@ p {
     margin: 20px auto;
     background-color: orange;
 }
+

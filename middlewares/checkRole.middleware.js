@@ -8,7 +8,7 @@ function checkRoleMiddleware() {
             next();
         }
         else {
-            return res.status(401).redirect('/home');
+            return res.status(401).redirect('/admin/home');
         }
     };
 };

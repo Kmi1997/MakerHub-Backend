@@ -73,3 +73,12 @@ a {
 a:hover {
     color: whitesmoke;
 }
+
+@media (max-width: 767px) {
+
+    #edit{
+        position: relative;
+        left: 38%;
+    }
+
+}

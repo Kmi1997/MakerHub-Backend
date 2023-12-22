@@ -12,28 +12,30 @@
 </header>
 <h3> Connexion </h3>
 <section>
-    <section>
-        <form action="/admin/testConnection" method="post">
-            <div class="formDiv">
-                <div>
-                    <label for="username">Nom d'utilisateur </label>
-                    <input type="text" name="username" id="username">
-                </div>
-                <br>
-                <div>
-                    <label for="password">Mot de passe </label>
-                    <input type="password" name="password" id="password">
-                </div>
-                <br>
-                <% if (error){ %>
-                <div>
-                    <p> <%= error %> </p>
-                    <% }%>
-                </div>
-                <input id="send" type="submit" value="Se connecter">
+    <form action="/admin/testConnection" method="post">
+        <div class="formDiv">
+            <div>
+                <label for="username">Nom d'utilisateur </label>
+                <input type="text" name="username" id="username">
             </div>
-        </form>
-    </section>
+            <br>
+            <div>
+                <label for="password">Mot de passe </label>
+                <input type="password" name="password" id="password">
+            </div>
+            <br>
+            <% if (error){ %>
+            <div>
+                <p> <%= error %> </p>
+                <% }%>
+            </div>
+            <input id="send" type="submit" value="Se connecter">
+            <a href="" id="publicURL">Retourner sur le site public</a>
+        </div>
+    </form>
 </section>
+<script>
+    document.querySelector('#publicURL').href = 'http://localhost:3400/public/stages';
+</script>
 </body>
 </html>

@@ -1,15 +1,12 @@
 const db = require('../configDb');
 const bcrypt = require('bcrypt');
 const { Op } = require("sequelize");
-require("dotenv").config({
-    path: `.env.${process.env.NODE_ENV}`
-});
+require("dotenv").config({path: `.env.${process.env.NODE_ENV}`});
 const jwt = require("jsonwebtoken");
 
 async function addAdmin(data) {
 
     const saltRounds = 10;
-    console.log(data.superRoot)
     data.password = await bcrypt.hash(data.password, saltRounds);
     await db.Admin.create(data);
     if (data.superRoot) {
