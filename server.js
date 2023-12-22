@@ -19,7 +19,6 @@ db.sequelize.sync().then(() => {
     app.set('views', path.join(__dirname, 'templates'));
 });
 
-
 //Globals middlewares
 app.use(cors());
 app.use(morgan(':method :url :status - :response-time ms'))
