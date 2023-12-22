@@ -6,8 +6,7 @@ const adminSchema = require('../validators/admin.validator');
 const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware');
 const checkRole = require('../middlewares/checkRole.middleware');
 
-adminRouter.post("/addAdmin", TokenCheckerMiddleware(), checkRole(),
-    bodyMiddleware(adminSchema, 'allParams'), adminController.addAdmin);
+adminRouter.post("/addAdmin", TokenCheckerMiddleware(), checkRole(), bodyMiddleware(adminSchema, 'allParams'), adminController.addAdmin);
 
 adminRouter.get('/home', TokenCheckerMiddleware(), adminController.home);
 adminRouter.get('/param', TokenCheckerMiddleware(), checkRole(), adminController.allParams);
