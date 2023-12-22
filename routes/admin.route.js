@@ -6,8 +6,7 @@ const adminSchema = require('../validators/admin.validator');
 const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware');
 const checkRole = require('../middlewares/checkRole.middleware');
 
-adminRouter.post("/addAdmin", TokenCheckerMiddleware(), checkRole(),
-    bodyMiddleware(adminSchema, 'allParams'), adminController.addAdmin);
+adminRouter.post("/addAdmin", TokenCheckerMiddleware(), checkRole(), bodyMiddleware(adminSchema, 'allParams'), adminController.addAdmin);
 
 adminRouter.get('/home', TokenCheckerMiddleware(), adminController.home);
 adminRouter.get('/param', TokenCheckerMiddleware(), checkRole(), adminController.allParams);
@@ -18,7 +17,6 @@ adminRouter.get("/internships/addnewinternship", TokenCheckerMiddleware(), admin
 adminRouter.post("/testConnection", adminController.testConnection);
 adminRouter.get("/connection", adminController.connection);
 adminRouter.get("/getThisAdmin", TokenCheckerMiddleware(), adminController.getThisAdmin);
-adminRouter.patch("/update/:id", TokenCheckerMiddleware(), adminController.update);
-adminRouter.delete("/delete/:id", TokenCheckerMiddleware(), adminController.destroy);
-
+adminRouter.post("/addAdmin", TokenCheckerMiddleware(), bodyMiddleware(adminSchema,'allParams'), adminController.addAdmin);
+adminRouter.get("/interns", TokenCheckerMiddleware(), adminController.viewInterns);
 module.exports = adminRouter;

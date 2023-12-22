@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/interns.css">
+</head>
+<body>
+<header>
+    <%- include('header') %>
+</header>
+<section>
+    <h3> Sélectionne une inscription pour la supprimer</h3>
+    <div class="modal">
+        <p>Veux-tu supprimer cette inscription?</p>
+        <button id="true" class="btn"> Oui </button>
+        <button id="false" class="btn"> Non </button>
+    </div>
+    <div id="interns" class="table-responsive-sm">
+        <% if (data.length == 0){ %>
+        <p> Il n'y a pas d'inscription prévue.</p>
+        <% } %>
+        <table class="table table-hover ">
+            <thead>
+            <tr>
+                <th scope="col">Prénom</th>
+                <th scope="col">Inscrit à:</th>
+                <th scope="col">Personne de contact</th>
+                <th scope="col">Numéro</th>
+            </tr>
+            </thead>
+            <tbody class="table-group-divider">
+            <% data.forEach(function(elem) { %>
+            <tr class="lines" data-id="<%=elem.id%>">
+                <td> <%=elem.childName%></td>
+                <% elem.Internships.forEach(function(internship) { %>
+                <td><%=internship.name%></td>
+                <% }); %>
+                <td><%=elem.parentName%></td>
+                <td><%=elem.parentPhone%></td>
+            </tr>
+            <% }); %>
+            <tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<script>
+    let dataId;
+    document.querySelectorAll('.lines').forEach((tr) => {
+        const modal = document.querySelector('.modal');
+            const handleClick = () => {
+                modal.style.left = '0px';
+                modal.style.top = '0px';
+                console.log(tr.getBoundingClientRect().top)
+                modal.style.top = (tr.getBoundingClientRect().top + window.scrollY - 50).toString() + 'px';
+                modal.style.left = (tr.getBoundingClientRect().left + window.scrollX).toString() + 'px';
+                modal.style.display = 'flex';
+                dataId = tr.dataset.id;
+            };
+
+        tr.addEventListener('click', () => {
+            handleClick();
+            console.log(dataId)
+        });
+
+        document.querySelector('#false').addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+    });
+
+    document.querySelector('#true').addEventListener('click', () => {
+        fetch(`/registration/delete/${dataId}`, {
+            method: 'DELETE'
+        })
+            .then(res => res.json())
+            .then(() => {
+                window.location.reload();
+            })
+            .catch(error => console.error(error));
+    });
+</script>
+</body>
+</html>

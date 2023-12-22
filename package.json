@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "bcrypt": "^5.1.0",
+    "bootstrap": "^5.3.2",
     "chalk": "^5.3.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
@@ -10,9 +11,11 @@
     "express-yup-middleware": "^1.2.3",
     "hogan.js": "^3.0.2",
     "jsonwebtoken": "^9.0.0",
+    "leaflet": "^1.9.4",
     "mariadb": "^3.1.2",
     "multer": "^1.4.5-lts.1",
     "mysql2": "^2.3.3",
+    "node-fetch": "^2.6.1",
     "nodemailer": "^6.9.0",
     "sequelize": "^6.28.0",
     "yup": "^0.32.11"
@@ -21,6 +24,7 @@
   "version": "1.0.0",
   "description": "MakerHub Backend Node JS ",
   "main": "server.js",
+  "type": "commonjs",
   "scripts": {
     "prod": "NODE_ENV=prod node server.js",
     "dev": "NODE_ENV=dev nodemon"

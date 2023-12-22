@@ -1,7 +1,7 @@
 
 h2{
     text-align: center;
-    font-size: 2.2em;
+    font-size: 1.9em;
     margin-bottom:20px;
     margin-top: 40px;
 }
@@ -46,4 +46,12 @@ form {
     height: 30px;
     margin: 20px;
     background-color: orange;
+}
+
+@media (max-width: 767px) {
+
+    h2{
+        font-size: 1.3em;
+    }
+
 }

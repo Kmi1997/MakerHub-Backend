@@ -1,0 +1,9 @@
+section {
+    margin-left: 10%;
+    margin-top: 10vh;
+}
+
+
+html {
+    overflow-y: scroll;
+}

@@ -1,7 +1,6 @@
-
 const adminService = require("../services/admin.service");
 const internshipService = require("../services/internship.service");
-const {all} = require("express/lib/application");
+const internService = require("../services/intern.service");
 
 const adminController = {
 
@@ -31,6 +30,20 @@ const adminController = {
             }
             else{
                 res.status(404).render('internships', {data : internships});
+            }
+        }
+        catch(err){ res.status(500).render('error'); }
+    },
+
+    viewInterns: async (req, res) => {
+
+        try{
+            const interns = await internService.getAll();
+            if (interns.length > 0){
+                res.status(200).render('interns', {data : interns});
+            }
+            else{
+                res.status(404).render('interns', {data : interns});
             }
         }
         catch(err){ res.status(500).render('error'); }

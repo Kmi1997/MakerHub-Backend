@@ -11,7 +11,7 @@
     <%- include('header') %>
 </header>
 <section>
-    <div id="addInternship">  <h4> <a href="/internships/addnewinternship"> Ajouter un stage </a></h4> </div>
+    <div id="addInternship">  <h4> <a href="/admin/internships/addnewinternship"> Ajouter un stage </a></h4> </div>
     <br/>
     <div id="internship">
         <% if (data.length == 0){ %>
@@ -58,7 +58,7 @@
         console.log('coucou')
         let id = ev.querySelector('[id=idInternship]');
         console.log(id);
-        window.location.href = "/internships/editInternship?id="+id.value;
+        window.location.href = "/admin/internships/editInternship?id="+id.value;
     }));
 
     subDivImg.forEach(ev => ev.addEventListener('mouseover', function(){

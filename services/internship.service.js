@@ -8,12 +8,12 @@ async function addInternship(data) {
 async function getInternship() {
     const internship = await db.Internship.findAll();
     return internship;
-};
+}
 
 async function getOne(id) {
     const internship = await db.Internship.findByPk(id);
     return internship;
-};
+}
 
 async function updating(req, newData) {
 
@@ -49,7 +49,7 @@ async function updating(req, newData) {
 async function destroy(id) {
     const toDelete = await getOne(id);
     return await toDelete.destroy();
-}
+};
 
 module.exports = {
     addInternship,

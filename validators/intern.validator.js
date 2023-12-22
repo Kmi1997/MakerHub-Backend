@@ -1,20 +1,19 @@
 const yup = require('yup');
+
 const requiredInput = (input) =>{
     return "Le champ " + input + " est requis."
 };
 const stringError = "Chaine de caractère obligatoire";
-const numberError = "Nombre obligatoire";
+const phoneRegex = /^(\+32\s?|0)([1-9])([0-9]{2})([0-9]{2})([0-9]{2})([0-9]{2})$/;
 
 const internSchema = yup.object({
 
     childName: yup.string().typeError(stringError).required(requiredInput(" 'prénom' ")),
     parentName: yup.string().typeError(stringError).required(requiredInput(" 'nom du parent' ")),
-    parentPhone: yup.string().typeError(stringError).required(requiredInput(" 'numéro de GSM' ")),
-    age: yup.number().typeError(numberError).required(requiredInput(" 'âge' ")),
-    paid: yup.bool().required(requiredInput(" 'payé' ")),
+    parentPhone: yup.string().matches(phoneRegex, "Numéro de GSM invalide").typeError(stringError).required(requiredInput(" 'numéro de GSM' ")),
+    age: yup.string().typeError(stringError).required(requiredInput(" 'âge' ")),
     mail: yup.string().email("Format mail obligatoire").required(requiredInput(" 'email' ")),
-    healthIssue: yup.string().typeError(stringError).nullable(),
-    internshipId: yup.number().typeError(numberError).required(requiredInput(" 'stage' ")),
+    internshipId: yup.string().typeError(stringError).required(requiredInput(" 'stage' ")),
 
 });
 
