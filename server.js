@@ -30,7 +30,6 @@ app.use(express.json());
 app.use(cookieParser());
 ///////////////////////
 
-
 //Main urls
 app.use("/admin", adminRouter)
 app.use("/registration", internRouter);
