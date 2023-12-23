@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>s'Cool Family</title>
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/interns.css">
 </head>
 <body>
@@ -18,17 +17,17 @@
         <button id="true" class="btn"> Oui </button>
         <button id="false" class="btn"> Non </button>
     </div>
-    <div id="interns" class="table-responsive-sm">
+    <div id="interns">
         <% if (data.length == 0){ %>
-        <p> Il n'y a pas d'inscription prévue.</p>
+        <p id="infoDelete"> Il n'y a pas d'inscription prévue.</p>
         <% } %>
-        <table class="table table-hover ">
+        <table>
             <thead>
             <tr>
-                <th scope="col">Prénom</th>
-                <th scope="col">Inscrit à:</th>
-                <th scope="col">Personne de contact</th>
-                <th scope="col">Numéro</th>
+                <th>Prénom</th>
+                <th>Inscrit à:</th>
+                <th>Personne de contact</th>
+                <th>Numéro</th>
             </tr>
             </thead>
             <tbody class="table-group-divider">

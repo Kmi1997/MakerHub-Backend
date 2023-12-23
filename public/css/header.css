@@ -9,6 +9,10 @@ header {
     background-color: orange;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+header > p {
+    font-size: 0.7em;
+}
 h1 {
     padding-top: 10px;
     font-size: 30px;
