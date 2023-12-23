@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 
 //Server activated
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORT, '0.0.0.0', () => {
     console.log(`Server running on ${process.env.PORT}, release beta ${release}`);
 })
 
