@@ -12,7 +12,7 @@ const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
-const release = '0.0.0'
+const release = '0.0.1'
 //DB Sync
 db.sequelize.sync().then(() => {
     console.log("DB sync ok");
