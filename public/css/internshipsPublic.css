@@ -14,6 +14,10 @@ html {
     padding-top: 10px;
 }
 
+.card{
+    width: 23rem;
+}
+
 section {
     margin-top: 5%;
     margin-bottom: 5%;
@@ -34,6 +38,7 @@ section {
 
    .card{
        margin-bottom: 30px;
+       width: 20rem;
    }
 
 }
