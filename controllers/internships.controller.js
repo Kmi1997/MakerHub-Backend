@@ -17,6 +17,7 @@ const internshipController = {
         };
     },
 
+
     getInternship: async (req, res) => {
 
         try {
