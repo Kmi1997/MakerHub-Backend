@@ -10,11 +10,10 @@ const internshipController = {
                 req.body.image = req.file.buffer;
             };
             await internshipService.addInternship(req.body);
-            res.status(201).json({ message: "Création du stage réussie" });
+            res.status(201).render('finishedOperation', { response: "Création du stage réussie" });
         }
         catch (error) {
-            if (error instanceof ValidationError) return res.status(400).render({ message: error.message, data: error });
-            res.status(500).json({ error: error.message });
+            res.status(500).render('error', { error: error.message });
         };
     },
 
