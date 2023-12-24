@@ -12,7 +12,7 @@ const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
-const release = '0.0.2'
+const release = '0.0.3b'
 //DB Sync
 db.sequelize.sync().then(() => {
     console.log("DB sync ok");
@@ -42,7 +42,7 @@ app.get('/', (req, res) => {
 
 //Server activated
 app.listen(process.env.PORT, '0.0.0.0', () => {
-    console.log(`Server running on ${process.env.PORT}, release beta ${release}`);
+    console.log(`Server running on ${process.env.PORT}, release ${release}`);
 })
 
 
