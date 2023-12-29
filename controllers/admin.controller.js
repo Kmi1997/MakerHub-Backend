@@ -11,7 +11,7 @@ const adminController = {
 
     homeJson: async (req, res) => {
 
-        const dataChart = await internshipService.getInternship();
+        const dataChart = await internshipService.getInternship(['numberAvailable', 'numberPlaces']);
 
         if (dataChart) {
             res.status(200).json(dataChart); // Envoyer une réponse JSON

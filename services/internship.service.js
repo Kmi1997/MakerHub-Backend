@@ -5,8 +5,14 @@ async function addInternship(data) {
     await db.Internship.create(data, {});
 };
 
-async function getInternship() {
-    const internship = await db.Internship.findAll();
+async function getInternship(attribute = []) {
+    let internship = null;
+    if (attribute.length > 0) {
+        internship = await db.Internship.findAll({attributes: attribute});
+    }
+    else {
+        internship = await db.Internship.findAll();
+    }
     return internship;
 }
 
