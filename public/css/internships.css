@@ -74,6 +74,11 @@ a:hover {
     color: whitesmoke;
 }
 
+#subDivImg{
+    max-width: 100%;
+    height: auto;
+}
+
 @media (max-width: 767px) {
 
     #edit{
