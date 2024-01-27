@@ -19,7 +19,7 @@ async function mail(receiver, internship, name, price) {
         const templateFile = fs.readFileSync('./templates/mail.html', 'utf-8');
         const templateCompiled = hogan.compile(templateFile);
         const templateRendered = templateCompiled.render({ internship: internship.toString(), name: name.toString(),
-            price: price.toString(), price2: (price - 10).toString() });
+            price: price.toString(), price2: (price - 5).toString() });
         let info = {
             from: `"s'cool Family" <camillefrischmann@gmail.com>`,
             to: receiver,

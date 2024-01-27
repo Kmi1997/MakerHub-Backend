@@ -12,51 +12,6 @@
 </header>
 <section>
     <br/>
-    <div id="chart"> <canvas id="myHomeChart"></canvas> </div>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script>
-        fetch('/admin/homeJson')
-            .then(data => data.json())
-            .then(dataJson => {
-                let labels = dataJson.map(x => x.name);
-                let numberAvailable = dataJson.map(x => x.numberPlaces - x.numberAvailable)
-                let maxNumbers = dataJson.map(x => x.numberPlaces);
-                const maxNumber = Math.max(...maxNumbers);
-                const canvas = document.getElementById('myHomeChart').getContext('2d');
-                const myChart = new Chart(canvas, {
-                    type: 'bar',
-                    data: {
-                        labels: labels,
-                        datasets: [{
-                            label: 'Inscriptions par stage',
-                            data: numberAvailable,
-                            backgroundColor: 'rgba(47, 207, 255, 0.8)',
-                            borderColor: 'rgba(144, 73, 110, 0.8)',
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        scales: {
-                            y: {
-                                beginAtZero: true,
-                                ticks: {
-                                    stepSize: 5,
-                                    precision: 0
-                                },
-                                title: {
-                                    display: true,
-                                    text: 'Nombre d\'inscriptions'
-                                },
-                                max: maxNumber
-                            }
-                        }
-                    }
-                });
-            })
-            .catch(error => {
-                return 'Erreur lors de la récupération des données JSON:' + error;
-            });
-    </script>
 </section>
 </body>
 </html>

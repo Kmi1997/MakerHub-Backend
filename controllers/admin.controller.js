@@ -29,7 +29,7 @@ const adminController = {
                 res.status(200).render('internships', {data : internships});
             }
             else{
-                res.status(404).render('internships', {data : internships});
+                res.status(200).render('internships', {data : internships});
             }
         }
         catch(err){ res.status(500).render('error'); }
@@ -43,7 +43,7 @@ const adminController = {
                 res.status(200).render('interns', {data : interns});
             }
             else{
-                res.status(404).render('interns', {data : interns});
+                res.status(200).render('interns', {data : interns});
             }
         }
         catch(err){ res.status(500).render('error'); }
@@ -93,7 +93,7 @@ const adminController = {
             res.status(201).cookie('jwt_token', token, {maxAge:3600000, httpOnly: true}).render('home');
         }
         else {
-            res.status(401).render('connection', { error: "Utilisateur inexistant ou mot de passe incorrect." });
+            res.status(200).render('connection', { error: "Utilisateur inexistant ou mot de passe incorrect." });
         }
     },
 
@@ -126,7 +126,7 @@ const adminController = {
             res.status(201).json({ message: "Administrateur supprimé" });
         }
         catch (err) {
-            res.status(404).json({ message: "Administrateur introuvable" });
+            res.status(200).json({ message: "Administrateur introuvable" });
         }
     },
 
