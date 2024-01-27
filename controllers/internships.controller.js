@@ -52,7 +52,11 @@ const internshipController = {
 
         if (req.file){
             req.body.image = req.file.buffer
-        };
+        }
+
+        if (!req.body.activated){
+            req.body.activated = false;
+        }
 
         try {
             await internshipService.updating(req.query.id, req.body);
@@ -60,7 +64,7 @@ const internshipController = {
         }
         catch (err) {
             res.status(500).render('finishedOperation', { response: "Erreur interne du serveur" });
-        };
+        }
     },
 
     destroy: async (req, res) => {
