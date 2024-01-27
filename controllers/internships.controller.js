@@ -54,12 +54,7 @@ const internshipController = {
             req.body.image = req.file.buffer
         };
 
-        if (!req.body.activated){
-            req.body.activated = false;
-        };
-
         try {
-            console.log(" là " + req.query.id)
             await internshipService.updating(req.query.id, req.body);
             res.status(201).render('finishedOperation', { response: "Stage mis à jour avec succès" });
         }
