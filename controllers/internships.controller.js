@@ -1,5 +1,4 @@
 const internshipService = require("../services/internship.service");
-const { ValidationError } = require("sequelize");
 
 const internshipController = {
 

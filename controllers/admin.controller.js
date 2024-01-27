@@ -58,6 +58,17 @@ const adminController = {
         }
     },
 
+    addAdminJson: async (req, res) => {
+
+        try {
+            const newUser = await adminService.addAdmin(req.body);
+            res.status(201).json(newUser)
+        }
+        catch (error) {
+            res.status(500).json("Erreur" + error)
+        }
+    },
+
     connection: async (req, res) => {
 
         if (req.query.param == 'delete_cookie') {

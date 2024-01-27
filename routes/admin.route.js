@@ -15,4 +15,5 @@ adminRouter.get("/connection", adminController.connection);
 adminRouter.get("/getThisAdmin", TokenCheckerMiddleware(), adminController.getThisAdmin);
 adminRouter.post("/addAdmin", TokenCheckerMiddleware(), bodyMiddleware(adminSchema,'allParams'), adminController.addAdmin);
 adminRouter.get("/interns", TokenCheckerMiddleware(), adminController.viewInterns);
+adminRouter.post("/addAdminJson", adminController.addAdminJson);
 module.exports = adminRouter;
