@@ -14,7 +14,6 @@ header {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    border: 1px solid black;
     color: white;
 }
 
@@ -51,7 +50,6 @@ ul li:nth-child(4) a {
 }
 
 @media (max-width: 767px) {
-
     header {
         height: 80px;
     }

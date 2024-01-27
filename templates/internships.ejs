@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="/css/internships.css">
 </head>
 <body>
-<header>
     <%- include('header') %>
-</header>
 <section>
     <div id="addInternship">  <h4> <a href="/admin/internships/addnewinternship"> Ajouter un stage </a></h4> </div>
     <br/>
@@ -22,18 +20,18 @@
             <div id="subDivImg">
                 <input id="idInternship" value="<%= elem.id %>" type="hidden"/>
                 <% if (elem.image){ %>
-                <img src="data:image/png;base64,<%= elem.image.toString('base64') %>">
+                    <img class="picture" src="data:image/png;base64,<%= elem.image.toString('base64') %>">
                 <% } else { %>
-                <img>
+                    <img class="picture" src="/no_image.png" alt="Pas d'image">
                 <% } %>
                 <p id="edit"> Modifier </p>
             </div>
             <div id="name">
                 <p> <%= elem.name %></p>
                 <% if (elem.activated){ %>
-                <p id="pGreen"> Actif </p>
+                    <p id="pGreen"> Actif </p>
                 <% } else { %>
-                <p id="pRed"> Désactivé </p>
+                    <p id="pRed"> Désactivé </p>
                 <% } %>
             </div>
         </div>
@@ -47,7 +45,7 @@
     divImg.forEach(div => subDivImg.push(div.querySelector('[id=subDivImg]')));
     divImg.forEach(div => subDivImg.push(div.querySelector('[id=idInternship]')));
     function resizeImg() {
-        const img = document.querySelectorAll('img');
+        const img = document.querySelectorAll('.picture');
         img.forEach(i => {
             i.style.width = '100%';
             i.style.height = '100%';
@@ -55,9 +53,7 @@
     };
 
     subDivImg.forEach(ev => ev.addEventListener('click', function(){
-        console.log('coucou')
         let id = ev.querySelector('[id=idInternship]');
-        console.log(id);
         window.location.href = "/admin/internships/editInternship?id="+id.value;
     }));
 

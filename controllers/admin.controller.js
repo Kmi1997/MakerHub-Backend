@@ -4,33 +4,16 @@ const internService = require("../services/intern.service");
 
 const adminController = {
 
-    home: async (req, res) => {
-        try { res.status(200).render('home'); }
+    internships: async (req, res) => {
+        try { res.status(200).render('internships'); }
         catch (error) { res.status(500).render('error') }
-    },
-
-    homeJson: async (req, res) => {
-
-        const dataChart = await internshipService.getInternship(['numberAvailable', 'numberPlaces']);
-
-        if (dataChart) {
-            res.status(200).json(dataChart); // Envoyer une réponse JSON
-        }
-        else {
-            res.status(200).json({ error: 'Aucune données trouvées' }); // Envoyer une réponse JSON avec erreur
-        }
     },
 
     viewInternships: async (req, res) => {
 
         try{
             const internships = await internshipService.getInternship();
-            if (internships.length > 0){
-                res.status(200).render('internships', {data : internships});
-            }
-            else{
-                res.status(200).render('internships', {data : internships});
-            }
+            res.status(200).render('internships', {data : internships});
         }
         catch(err){ res.status(500).render('error'); }
     },
@@ -88,9 +71,9 @@ const adminController = {
     testConnection: async (req, res) => {
 
         const token = await adminService.connection(req.body);
-
+        const internships = await internshipService.getInternship();
         if (token) {
-            res.status(201).cookie('jwt_token', token, {maxAge:3600000, httpOnly: true}).render('home');
+            res.status(201).cookie('jwt_token', token, {maxAge:3600000, httpOnly: true}).render('internships', {data: internships});
         }
         else {
             res.status(200).render('connection', { error: "Utilisateur inexistant ou mot de passe incorrect." });
@@ -100,7 +83,6 @@ const adminController = {
     getThisAdmin: async (req, res) => {
         try {
             const thisAdmin = await adminService.getThisAdmin(req.headers.authorization);
-            console.log(thisAdmin);
             res.status(201).json(thisAdmin);
         }
         catch (error) {

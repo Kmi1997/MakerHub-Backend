@@ -25,7 +25,6 @@ const publicController = {
                 }
                 catch(error) { elem.geo = null }
             }));
-                console.log(internships[0].geo)
             res.status(200).render('internshipsPublic', {data : internships});
         }
         catch(err){ res.status(500).render('error'); }

@@ -27,7 +27,6 @@ async function updating(req, newData) {
 
     if (toUpdate.numberAvailable < toUpdate.numberPlaces){
         const test = toUpdate.numberAvailable + (newData.numberPlaces - toUpdate.numberPlaces)
-        console.log(test)
         await toUpdate.update({
             numberPlaces: newData.numberPlaces,
             numberAvailable: test

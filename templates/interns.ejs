@@ -7,9 +7,7 @@
     <link rel="stylesheet" href="/css/interns.css">
 </head>
 <body>
-<header>
     <%- include('header') %>
-</header>
 <section>
     <h3> Sélectionne une inscription pour la supprimer</h3>
     <div class="modal">
@@ -30,7 +28,7 @@
                 <th>RGPD</th>
             </tr>
             </thead>
-            <tbody class="table-group-divider">
+            <tbody>
             <% data.forEach(function(elem) { %>
             <tr class="lines" data-id="<%=elem.id%>">
                 <td> <%=elem.childName%></td>
@@ -53,7 +51,6 @@
             const handleClick = () => {
                 modal.style.left = '0px';
                 modal.style.top = '0px';
-                console.log(tr.getBoundingClientRect().top)
                 modal.style.top = (tr.getBoundingClientRect().top + window.scrollY - 50).toString() + 'px';
                 modal.style.left = (tr.getBoundingClientRect().left + window.scrollX).toString() + 'px';
                 modal.style.display = 'flex';
@@ -62,7 +59,6 @@
 
         tr.addEventListener('click', () => {
             handleClick();
-            console.log(dataId)
         });
 
         document.querySelector('#false').addEventListener('click', () => {

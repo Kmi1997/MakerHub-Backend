@@ -6,7 +6,6 @@ async function addIntern(data) {
     //to secure creations
     const transaction = await db.sequelize.transaction();
     const internship = await db.Internship.findByPk(data.internshipId);
-    console.log(internship)
     if (!internship.activated){
         return "Le stage n'est pas actif: l'inscription est annulée."
     };
