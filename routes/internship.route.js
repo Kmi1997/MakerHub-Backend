@@ -16,7 +16,7 @@ internshipRouter.post("/addInternship", upload.single('image_file'),
 internshipRouter.get("/getAll", TokenCheckerMiddleware(), internshipController.getInternship);
 internshipRouter.get("/getOne", internshipController.getOne);
 
-internshipRouter.post("/updating", upload.single('image_file'), TokenCheckerMiddleware(),
+internshipRouter.post("/updating", upload.single('image'), TokenCheckerMiddleware(),
     bodyMiddleware(internshipSchema, 'editInternship'), internshipController.updating);
 
 internshipRouter.delete("/delete/:id", internshipController.destroy);

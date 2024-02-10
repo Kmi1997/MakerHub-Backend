@@ -38,26 +38,29 @@ async function updating(req, newData) {
     if (toUpdate.numberAvailable < toUpdate.numberPlaces){
         const test = toUpdate.numberAvailable + (newData.numberPlaces - toUpdate.numberPlaces)
         await toUpdate.update({
-            numberPlaces: newData.numberPlaces,
             numberAvailable: test
         });
     }
     else{
         await toUpdate.update({
-            name: newData.name,
-            numberPlaces: newData.numberPlaces,
             numberAvailable: newData.numberPlaces,
-            startDate: newData.startDate,
-            endDate: newData.endDate,
-            startHour: newData.startHour,
-            endHour: newData.endHour,
-            place: newData.place,
-            fromAge: newData.fromAge,
-            price: newData.price,
-            desc: newData.desc,
-            activated: newData.activated
         });
     }
+    await toUpdate.update({
+        name: newData.name,
+        numberPlaces: newData.numberPlaces,
+        numberAvailable: newData.numberPlaces,
+        startDate: newData.startDate,
+        endDate: newData.endDate,
+        startHour: newData.startHour,
+        endHour: newData.endHour,
+        place: newData.place,
+        fromAge: newData.fromAge,
+        price: newData.price,
+        desc: newData.desc,
+        activated: newData.activated,
+        image: newData.image
+    });
     await toUpdate.save();
 }
 
