@@ -21,7 +21,7 @@ async function mail(receiver, internship, name, price) {
         const templateRendered = templateCompiled.render({ internship: internship.toString(), name: name.toString(),
             price: price.toString(), price2: (price - 5).toString() });
         let info = {
-            from: `"s'cool Family" <camillefrischmann@gmail.com>`,
+            from: `"s'cool Family" <scoolfamily@outlook.com>`,
             to: receiver,
             subject: "s'Cool Family - Confirmation d'inscription",
             html: templateRendered,

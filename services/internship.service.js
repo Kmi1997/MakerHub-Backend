@@ -1,18 +1,28 @@
 const db = require("../configDb");
-
+const { Op } = require("sequelize");
 async function addInternship(data) {
     data.numberAvailable = data.numberPlaces;
     await db.Internship.create(data, {});
-};
+}
 
-async function getInternship(attribute = []) {
-    let internship = null;
+async function getInternship(attribute = [], activated=null) {
+    let internship;
+    let activatedCondition= {}
+    if (activated){
+        activatedCondition = { activated: activated}
+    }
     if (attribute.length > 0) {
-        internship = await db.Internship.findAll({attributes: attribute});
+        internship = await db.Internship.findAll({
+            attributes: attribute,
+            where: { endDate: {[Op.lte]: new Date()}, ...activatedCondition}
+        });
     }
     else {
-        internship = await db.Internship.findAll();
+        internship = await db.Internship.findAll({
+            where: activatedCondition
+        });
     }
+
     return internship;
 }
 
@@ -47,14 +57,14 @@ async function updating(req, newData) {
             desc: newData.desc,
             activated: newData.activated
         });
-    };
+    }
     await toUpdate.save();
-};
+}
 
 async function destroy(id) {
     const toDelete = await getOne(id);
     return await toDelete.destroy();
-};
+}
 
 module.exports = {
     addInternship,

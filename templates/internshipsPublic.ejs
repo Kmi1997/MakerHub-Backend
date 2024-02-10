@@ -3,28 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/internshipsPublic.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <title>s'Cool Family</title>
 </head>
 <body>
-<%- include('homePublic') %>
+<%- include('headerPublic') %>
 <section>
     <% if (data.length == 0){ %>
     <p> Il n'y a aucun stage prévu.</p>
     <% } else { %>
     <% data.forEach(function(elem, index) { %>
-    <div id="internship">
-        <div>
+    <div id="fullInternships">
+        <div id="internship">
             <div>
                 <div id="title">
                     <h5><%= elem.name %></h5>
                 </div>
-                <% if (elem.image) { %>
+                <% if (elem.image && elem.numberAvailable > 0) { %>
                 <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" class="card-img-top" alt="Illustration du stage">
+                <% } else if (elem.numberAvailable == 0) { %>
+                <img src="/full.png" alt="Stage complet">
                 <% } else { %>
-                <img src="/no_image.png" alt="Pas d'image">
+                <img src="/no_image.png" alt="Pas d'image disponible">
                 <% } %>
                 <ul>
                     <li><%= elem.desc %>
@@ -51,7 +53,7 @@
     <% }); %>
     <% } %>
 </section>
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
 <script>
     let allMaps = document.querySelectorAll('.map');
 
@@ -77,11 +79,19 @@
 
                 L.marker(myLatLng).addTo(map)
                     .bindPopup('Hello World!');
-
             }
+
+            let parentDiv = elem.closest('.internship');
+
+            // Récupérez la hauteur totale du contenu à l'intérieur de la div "internship"
+            let contentHeight = parentDiv.scrollHeight;
+
+            // Réglez la hauteur de la div "internship" pour inclure tout le contenu
+            parentDiv.style.height = contentHeight + 'px';
         });
     });
 
 </script>
+<%- include('footerPublic') %>
 </body>
 </html>

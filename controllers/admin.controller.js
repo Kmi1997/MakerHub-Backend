@@ -22,12 +22,7 @@ const adminController = {
 
         try{
             const interns = await internService.getAll();
-            if (interns.length > 0){
-                res.status(200).render('interns', {data : interns});
-            }
-            else{
-                res.status(200).render('interns', {data : interns});
-            }
+            res.status(200).render('interns', {data : interns});
         }
         catch(err){ res.status(500).render('error'); }
     },
@@ -45,17 +40,6 @@ const adminController = {
             res.status(200).render('editInternship', {data : internship, errors : null });
         }
         catch{ res.status(500).render('error') }
-    },
-
-    addAdmin: async (req, res) => {
-
-        try {
-            const newUser = await adminService.addAdmin(req.body);
-            res.status(201).render('finishedOperation', { response: newUser });
-        }
-        catch (error) {
-            res.status(500).render('error', { error: "Erreur interne.." });
-        }
     },
 
     addAdminJson: async (req, res) => {

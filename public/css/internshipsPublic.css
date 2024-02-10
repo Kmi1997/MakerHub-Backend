@@ -1,44 +1,76 @@
 
-html {
-    overflow-y: scroll;
+section{
+    height: 50vh;
 }
-
-#title {
-    background-color: orange;
-    border-radius: 4px;
-    text-align: center;
-}
-
-#title h5 {
-    padding-bottom: 10px;
-    padding-top: 10px;
-}
-
-.card{
-    width: 23rem;
-}
-
-section {
-    margin-top: 5%;
-    margin-bottom: 5%;
+#fullInternships {
     display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
 }
 
-
-#map {
-    width: 50%;
-    height: 50vh;
-    margin: 5vh auto;
+#internship {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: calc(33.33% - 40px); /* Trois cartes par ligne */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-height: 540px;
+    position: relative;
+    overflow-y: auto; /* Ajoutez une barre de défilement verticale si nécessaire */
+    overflow: auto;
 }
 
-@media (max-width: 767px) {
+#internship > div > img {
+    width: 70%;
+    display: block;
+    margin: auto;
+}
 
-   .card{
-       margin-bottom: 30px;
-       width: 20rem;
-   }
+#internship h5 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
 
+#internship ul {
+    list-style: none;
+    padding: 0;
+}
+
+#internship ul li {
+    margin-bottom: 10px;
+}
+
+#internship img {
+    max-width: 100%;
+    border-radius: 8px;
+}
+
+#internship .btn {
+    display: inline-block;
+    background-color: #ffc107;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+#internship .btn:hover {
+    background-color: #ffca28;
+}
+
+@media only screen and (max-width: 768px) {
+    #internship {
+        width: calc(50% - 40px); /* Deux cartes par ligne sur les écrans moyens */
+        max-height: 315px;
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    #internship {
+        width: calc(100% - 40px); /* Une carte par ligne sur les petits écrans */
+    }
 }

@@ -62,12 +62,17 @@ section div:first-of-type p {
         width: 100%;
     }
 
-    section div:first-child {
+    section div:first-of-type p {
         width: 100%;
-        height: 12vh;
+        font-size: 0.8em;
+    }
+
+    section div:first-of-type {
+        width: 100%;
     }
 
     .btn {
         width: 15%;
     }
+
 }

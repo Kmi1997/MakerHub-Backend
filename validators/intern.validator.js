@@ -14,7 +14,7 @@ const internSchema = yup.object({
     age: yup.string().typeError(stringError).required(requiredInput(" 'âge' ")),
     mail: yup.string().email("Format mail obligatoire").required(requiredInput(" 'email' ")),
     internshipId: yup.string().typeError(stringError).required(requiredInput(" 'stage' ")),
-
+    imgRights: yup.bool()
 });
 
 

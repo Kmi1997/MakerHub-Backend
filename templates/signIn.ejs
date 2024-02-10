@@ -4,10 +4,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>s'Cool Family</title>
     <link rel="stylesheet" href="/css/signIn.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-<%- include('homePublic') %>
+<%- include('headerPublic') %>
 <section>
     <% if (errors){ %>
     <div id="errors" style="display: none;"> <%= errors %> </div>
@@ -17,29 +16,33 @@
     <h2>Inscription : <%= data.name %></h2>
     <br>
     <form action="/registration/addIntern" method="post" enctype="application/json">
-        <div class="form-group col-lg-3 col-md-4 col-sm-6">
+        <div>
             <label for="childName">Prénom de l'enfant:</label>
             <input type="text" class="form-control" name="childName" id="childName">
         </div>
-        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+        <div>
             <label for="age">Âge:</label>
             <input type="number" class="form-control" name="age" id="age" min="<%= data.fromAge %>"/>
         </div>
-        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
-            <label for="parentName">Nom d'un parent:</label>
+        <div>
+            <label for="parentName">Nom d'un parent responsable:</label>
             <input type="text" class="form-control" name="parentName" id="parentName"/>
         </div>
-        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+        <div>
             <label for="parentPhone">GSM:</label>
             <input type="tel" class="form-control" name="parentPhone" id="parentPhone"/>
         </div>
-        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+        <div>
             <label for="mail">Adresse mail:</label>
             <input type="email" class="form-control" name="mail" id="mail"/>
         </div>
-        <div class="form-group col-lg-3 col-md-4 col-sm-6" >
+        <div>
             <label for="internshipId"></label>
             <input type="hidden" name="internshipId" id="internshipId" value="<%= data.id %>"/>
+        </div>
+        <div>
+            <label for="imgRights">Droit à l'image</label>
+            <input type="checkbox" name="imgRights" id="imgRights"/>
         </div>
         <button type="submit" class="btn btn-warning">Valider</button>
     </form>
@@ -51,6 +54,13 @@
 <script>
     createErrors();
     const form = document.querySelector('form');
+    let imgRights = document.getElementById("imgRights");
+    imgRights.addEventListener("click", function() {
+        if (imgRights.checked){
+            imgRights.value = true;
+        }
+    });
+
     form.addEventListener('submit', () => {
         const formValues = {
             "childName": document.getElementById('childName').value,
@@ -58,7 +68,8 @@
             "parentPhone": document.getElementById('parentPhone').value,
             "age": document.getElementById('age').value,
             "mail": document.getElementById('mail').value,
-            "internshipId": document.getElementById('internshipId').value
+            "internshipId": document.getElementById('internshipId').value,
+            "imgRights": imgRights.value
         };
         sessionStorage.setItem('values', JSON.stringify(formValues));
     });
@@ -70,7 +81,8 @@
         document.getElementById('mail').value = values.mail;
         document.getElementById('parentPhone').value = values.parentPhone;
         document.getElementById('age').value = values.age;
-        document.getElementById('internshipId').value;
+        document.getElementById('internshipId').value = value.internshipId;
+        document.getElementById('imgRights').value = value.imgRights;
     }
 
     const age = document.getElementById('age');

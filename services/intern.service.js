@@ -56,7 +56,8 @@ async function updating(req, newData) {
             healthIssue: newData.healthIssue,
             age: newData.age,
             mail: newData.mail,
-            internshipId: newData.internshipId
+            internshipId: newData.internshipId,
+            imgRights: newData.imgRights
         });
         await toUpdate.save();
         return toUpdate;

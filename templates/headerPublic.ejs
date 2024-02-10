@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s'Cool Family</title>
+    <link rel="stylesheet" href="/css/header.css">
+</head>
+<body>
+<header>
+    <div id="logo">
+        <img id="logo_img" src="/logo.png" alt="Logo de s'Cool Family">
+        <a id="fb_link" href="https://www.facebook.com/SCFMY?locale=fr_FR" target="_blank">
+            <img id="fb_logo" src="/fb.png" alt="Page Facebook">
+        </a>
+    </div>
+    <button id="burger">Menu</button>
+    <ul class="menu-horizontal">
+        <li><a href="/public/stages">Les stages</a></li>
+        <li><a href="/admin/home">Portail administrateur</a></li>
+    </ul>
+</header>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const burger = document.getElementById('burger');
+        const menu = document.querySelector('.menu-horizontal');
+
+        burger.addEventListener('click', () => {
+            menu.classList.toggle('show');
+        });
+    });
+</script>
+</body>
+</html>
