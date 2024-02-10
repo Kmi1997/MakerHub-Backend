@@ -25,6 +25,14 @@ form {
     width: 200px;
 }
 
+.formDiv div label {
+    margin-bottom: 5px; /* Ajouter un espacement sous l'étiquette */
+}
+
+.formDiv div input {
+    width: 100%; /* Utiliser toute la largeur disponible */
+}
+
 #divErrors {
     margin-top: 20px;
     border: 1px solid black;
