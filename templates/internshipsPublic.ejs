@@ -12,7 +12,7 @@
 <%- include('headerPublic') %>
 <section>
     <% if (data.length == 0){ %>
-    <p> Il n'y a aucun stage prévu.</p>
+    <p id="no_internship"> Il n'y a aucun stage prévu.</p>
     <% } else { %>
     <% data.forEach(function(elem, index) { %>
     <div id="fullInternships">

@@ -21,6 +21,10 @@ section{
     overflow: auto;
 }
 
+#no_internship{
+    font-size: 2em;
+}
+
 #internship > div > img {
     width: 70%;
     display: block;
@@ -72,5 +76,9 @@ section{
 @media only screen and (max-width: 576px) {
     #internship {
         width: calc(100% - 40px); /* Une carte par ligne sur les petits écrans */
+    }
+
+    #no_internship{
+        font-size: 1em;
     }
 }
