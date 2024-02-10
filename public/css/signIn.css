@@ -37,7 +37,7 @@ input[type="checkbox"]
     box-sizing: border-box;
 }
 
-button {
+form button {
     margin-top: 5%;
     width: 5%;
     padding: 8px;
@@ -48,7 +48,7 @@ button {
     form div {
         width: 90%; /* Une colonne sur les écrans plus petits */
     }
-    button {
+    form button {
         margin-top: 5%;
         width: 20%;
         margin-bottom: 5%;
