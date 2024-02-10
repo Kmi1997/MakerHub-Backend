@@ -11,22 +11,22 @@
 <body>
 <%- include('headerPublic') %>
 <section>
-    <% if (data.length == 0){ %>
-    <p id="no_internship"> Il n'y a aucun stage prévu.</p>
-    <% } else { %>
-    <% data.forEach(function(elem, index) { %>
     <div id="fullInternships">
-        <div id="internship">
+        <% if (data.length == 0){ %>
+        <p id="no_internship"> Il n'y a aucun stage prévu.</p>
+        <% } else { %>
+        <% data.forEach(function(elem, index) { %>
+        <div class="internship">
             <div>
                 <div id="title">
                     <h5><%= elem.name %></h5>
                 </div>
                 <% if (elem.image && elem.numberAvailable > 0) { %>
-                <img src="data:image/png;base64,<%= elem.image.toString('base64') %>" class="card-img-top" alt="Illustration du stage">
+                <img class='img' src="data:image/png;base64,<%= elem.image.toString('base64') %>" alt="Illustration du stage">
                 <% } else if (elem.numberAvailable == 0) { %>
-                <img src="/full.png" alt="Stage complet">
+                <img class='img' src="/full.png" alt="Stage complet">
                 <% } else { %>
-                <img src="/no_image.png" alt="Pas d'image disponible">
+                <img class='img' src="/no_image.png" alt="Pas d'image disponible">
                 <% } %>
                 <ul>
                     <li><%= elem.desc %>
@@ -37,7 +37,7 @@
                     </li>
                     <li><strong>À partir de</strong> <%= elem.fromAge %> ans</li>
                     <li><strong>Où</strong> ?
-                        <input type="button" style="color: darkgoldenrod;" class="map" value="<%= elem.place %>">
+                        <input type="button" style="color: #ff8800;" class="map" value="<%= elem.place %>">
                         <input type="hidden" class="map" value="<%= index %>, <%= elem.geo.lat %>, <%= elem.geo.lon %>">
                     </li>
                     <li><strong>Quand ? </strong> Du <%= new Date(elem.startDate).toLocaleDateString('fr-FR') %>
@@ -49,14 +49,21 @@
                 </ul>
             </div>
         </div>
+        <% }); %>
     </div>
-    <% }); %>
     <% } %>
 </section>
 
 <script>
-    let allMaps = document.querySelectorAll('.map');
 
+   if (window.matchMedia("(min-width: 768px)").matches){
+       let allImg = document.querySelectorAll('.img');
+       allImg.forEach(i => {
+           i.style.height = 240 + 'px';
+       });
+   }
+
+    let allMaps = document.querySelectorAll('.map');
     allMaps.forEach(elem => {
 
         elem.addEventListener('click', function() {
@@ -67,7 +74,7 @@
 
                 const [index, lat, lon] = nextDivHidden.value.toString().split(', ');
                 let mapDiv = document.createElement('div');
-                mapDiv.style.height = '30vh';
+                mapDiv.style.height = '20vh';
                 mapDiv.setAttribute('id', elem.value + index);
                 elem.insertAdjacentElement('afterend', mapDiv);
                 let myLatLng = [lat, lon];
@@ -83,10 +90,10 @@
 
             let parentDiv = elem.closest('.internship');
 
-            // Récupérez la hauteur totale du contenu à l'intérieur de la div "internship"
+            // Récupérer la hauteur totale du contenu à l'intérieur de la div "internship"
             let contentHeight = parentDiv.scrollHeight;
 
-            // Réglez la hauteur de la div "internship" pour inclure tout le contenu
+            // Régler la hauteur de la div "internship" pour inclure tout le contenu
             parentDiv.style.height = contentHeight + 'px';
         });
     });
