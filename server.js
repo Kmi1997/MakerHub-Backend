@@ -38,8 +38,8 @@ app.get('/', (req, res) => {
 
 
 //Server activated
-app.listen(process.env.PORT1 || process.env.PORT2, '0.0.0.0', () => {
-    console.log(`Server running on ${process.env.PORT1} ou ${process.env.PORT2}, release ${release}`);
+app.listen(process.env.PORT, '0.0.0.0', () => {
+    console.log(`Server running on ${process.env.PORT}, release ${release}`);
 })
 
 
