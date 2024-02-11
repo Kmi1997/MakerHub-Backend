@@ -1,5 +1,4 @@
 require("dotenv").config({path: `.env.${process.env.NODE_ENV}`});
-
 const path = require('path');
 const express = require("express");
 const app = express();
@@ -11,7 +10,6 @@ const internshipRouter = require("./routes/internship.route");
 const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
-const cookieParser = require('cookie-parser');
 const release = '0.0.4b'
 //DB Sync
 db.sequelize.sync().then(() => {
@@ -27,7 +25,6 @@ app.use(urlencoded({ extended: true }));
 app.use('/', express.static('public'));
 app.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
 app.use(express.json());
-app.use(cookieParser());
 ///////////////////////
 
 //Main urls

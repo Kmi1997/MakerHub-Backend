@@ -87,7 +87,8 @@
 
     const age = document.getElementById('age');
     age.addEventListener('input', () => {
-        if (parseInt(age.value) < parseInt(age.getAttribute('min'))) age.value = age.getAttribute('min');
+        age.value = parseInt(age.value);
+        if (age.value < parseInt(age.getAttribute('min')) && age.value < 10) age.value = age.getAttribute('min');
     });
 
 </script>

@@ -3,6 +3,7 @@ const adminModel = require("./models/admin");
 const InternModel = require("./models/intern");
 const InternInternshipModel = require("./models/InternInternship");
 const InternshipModel = require("./models/internship");
+const PictureModel= require("./models/pictures");
 
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`
@@ -29,8 +30,13 @@ const db = {
     Intern: InternModel(sequelize),
     Internship: InternshipModel(sequelize),
     InternInternship: InternInternshipModel(sequelize),
-    Admin: adminModel(sequelize)
+    Admin: adminModel(sequelize),
+    Picture: PictureModel(sequelize)
 };
+
+db.Internship.hasMany(db.Picture, {
+    foreignKey: 'internship_id'
+});
 
 //Many-to-many associations
 db.Intern.belongsToMany(db.Internship, {
@@ -41,7 +47,6 @@ db.Intern.belongsToMany(db.Internship, {
 db.Internship.belongsToMany(db.Intern, {
     through: db.InternInternship,
     primaryKey: 'id'
-
 });
 
 module.exports = db;
