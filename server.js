@@ -10,7 +10,7 @@ const internshipRouter = require("./routes/internship.route");
 const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
-const release = '0.0.4b'
+const release = '0.0.5b'
 //DB Sync
 db.sequelize.sync().then(() => {
     console.log("DB sync ok");
