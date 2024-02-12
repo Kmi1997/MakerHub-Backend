@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 function TokenCheckerMiddleware() {
 
     return function TokenChecker(req, res, next) {
-        if (req.cookies.jwt_token) {
+        if (req.cookies && req.cookies.jwt_token !== undefined) {
             // const token = req.headers.authorization.replace("Bearer ", "");
             jwt.verify(req.cookies.jwt_token, process.env.JWT_SECRET, {
                 ignoreExpiration: false

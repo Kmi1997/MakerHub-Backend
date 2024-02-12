@@ -1,7 +1,6 @@
 const express = require("express");
 const adminController = require("../controllers/admin.controller");
 const adminRouter = express.Router();
-const bodyMiddleware = require('../middlewares/bodyValidator.middleware');
 const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware');
 
 adminRouter.get('/home', TokenCheckerMiddleware(), adminController.internships);
