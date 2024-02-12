@@ -66,9 +66,10 @@ const adminController = {
     testConnection: async (req, res) => {
 
         const token = await adminService.connection(req.body);
-        const internships = await internshipService.getInternship();
         if (token) {
-            res.status(201).cookie('jwt_token', token, {maxAge:3600000, httpOnly: true}).render('internships', {data: internships});
+            const internships = await internshipService.getInternship();
+            res.status(201).cookie('jwt_token', token, {maxAge:3600000, httpOnly: true}).render('internships',
+                {data: internships});
         }
         else {
             res.status(200).render('connection', { error: "Utilisateur inexistant ou mot de passe incorrect." });

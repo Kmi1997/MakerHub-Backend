@@ -10,7 +10,9 @@ const internshipRouter = require("./routes/internship.route");
 const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
-const release = '0.0.5b'
+const cookieParser = require('cookie-parser');
+const release = '0.0.6b';
+
 //DB Sync
 db.sequelize.sync().then(() => {
     console.log("DB sync ok");
@@ -20,6 +22,7 @@ db.sequelize.sync().then(() => {
 
 //Globals middlewares
 app.use(cors());
+app.use(cookieParser());
 app.use(morgan(':method :url :status - :response-time ms'))
 app.use(urlencoded({ extended: true }));
 app.use('/', express.static('public'));
