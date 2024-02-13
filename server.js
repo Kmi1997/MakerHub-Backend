@@ -13,7 +13,7 @@ const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const https = require('https');
-const release = '0.0.6b';
+const release = '0.0.7b';
 
 //DB Sync
 db.sequelize.sync().then(() => {
@@ -48,11 +48,14 @@ if (process.env.ENVIRONNEMENT =='DEV'){
 }
 
 if (process.env.ENVIRONNEMENT == 'PROD'){
+    app.listen(process.env.PORT, '0.0.0.0', () => {
+        console.log(`Server running on ${process.env.PORT}, release ${release}`);
+    });
     const httpsServer = https.createServer({
         key: fs.readFileSync("/etc/letsencrypt/live/www.scoolfamily.be/privkey.pem"),
         cert: fs.readFileSync("/etc/letsencrypt/live/www.scoolfamily.be/fullchain.pem"),
     }, app);
-    console.log("Serveur démarré en HTTPS")
+    console.log(`Serveur démarré en HTTPS, release ${release}`)
     httpsServer.listen(443);
 }
 
