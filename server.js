@@ -13,7 +13,6 @@ const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
 const http = require('http');
 const https = require('https');
-const greenlockExpress = require('greenlock-express');
 const release = '0.0.6b';
 
 //DB Sync
@@ -41,25 +40,18 @@ app.get('/', (req, res) => {
     res.redirect('/public/stages')
 })
 
-const httpServer = http.createServer(app);
-httpServer.listen(80);
+// dev server
+app.listen(process.env.PORT, '0.0.0.0', () => {
+    console.log(`Server running on ${process.env.PORT}, release ${release}`);
+})
+
 
 if (process.env.ENVIRONNEMENT == 'PROD'){
-
-const greenlock = greenlockExpress.init({
-    packageRoot: __dirname,
-    maintainerEmail: 'camillefrischmann@gmail.com',
-    // Accepter les conditions d'utilisation de Let's Encrypt
-    agreeTos: true,
-    // Configurer la méthode de validation du domaine (http-01 ou dns-01)
-    configDir: "./greenlock.d",
-    communityMember: true,
-    app: app
-});
-
-const httpsServer = https.createServer(greenlock.tlsOptions, app);
-httpsServer.listen(443);
-
+    const httpsServer = https.createServer({
+        key: fs.readFileSync("key.pem"),
+        cert: fs.readFileSync("cert.pem"),
+    }, app);
+    httpsServer.listen(443);
 }
 
 //Server activated
