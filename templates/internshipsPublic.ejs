@@ -55,10 +55,12 @@
 </section>
 
 <script>
+
     let allImg = document.querySelectorAll('.img');
     if (window.matchMedia("(min-width: 768px)").matches){
         allImg.forEach(i => {
-            i.style.height = 265 + 'px';
+            i.style.height = 300 + 'px';
+            i.style.width = 260 + 'px';
         });
     }
 

@@ -15,5 +15,18 @@
     </ul>
     <p>© 2024 s'Cool Family. Tous droits réservés.</p>
 </footer>
+<script>
+    const footer = document.querySelector('footer');
+    console.log(footer)
+    window.addEventListener("scroll", function() {
+        // Vérifie si on est à la fin de la page
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+            footer.style.transform = 'translateY(100%)';
+        }
+        else {
+            footer.style.transform = 'translateY(0%)';
+        }
+    });
+</script>
 </body>
 </html>
