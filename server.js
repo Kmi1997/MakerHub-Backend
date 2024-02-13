@@ -11,7 +11,7 @@ const publicRouter = require("./routes/public.route");
 const adminRouter = require("./routes/admin.route");
 const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
-const http = require('http');
+const fs = require('fs');
 const https = require('https');
 const release = '0.0.6b';
 
@@ -49,9 +49,10 @@ if (process.env.ENVIRONNEMENT =='DEV'){
 
 if (process.env.ENVIRONNEMENT == 'PROD'){
     const httpsServer = https.createServer({
-        key: fs.readFileSync("key.pem"),
-        cert: fs.readFileSync("cert.pem"),
+        key: fs.readFileSync("/etc/letsencrypt/live/www.scoolfamily.be/privkey.pem"),
+        cert: fs.readFileSync("/etc/letsencrypt/live/www.scoolfamily.be/fullchain.pem"),
     }, app);
+    console.log("Serveur démarré en HTTPS")
     httpsServer.listen(443);
 }
 
