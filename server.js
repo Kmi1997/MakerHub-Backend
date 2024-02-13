@@ -41,10 +41,11 @@ app.get('/', (req, res) => {
 })
 
 // dev server
-app.listen(process.env.PORT, '0.0.0.0', () => {
-    console.log(`Server running on ${process.env.PORT}, release ${release}`);
-})
-
+if (process.env.ENVIRONNEMENT =='DEV'){
+    app.listen(process.env.PORT, '0.0.0.0', () => {
+        console.log(`Server running on ${process.env.PORT}, release ${release}`);
+    });
+}
 
 if (process.env.ENVIRONNEMENT == 'PROD'){
     const httpsServer = https.createServer({
