@@ -1,9 +1,8 @@
 const jwt = require('jsonwebtoken');
 
+function tokenCheckerMiddleware() {
 
-function TokenCheckerMiddleware() {
-
-    return function TokenChecker(req, res, next) {
+    return function tokenChecker(req, res, next) {
         if (req.cookies.jwt_token) {
             // const token = req.headers.authorization.replace("Bearer ", "");
             jwt.verify(req.cookies.jwt_token, process.env.JWT_SECRET, {
@@ -21,4 +20,4 @@ function TokenCheckerMiddleware() {
 }
 
 
-module.exports = TokenCheckerMiddleware;
+module.exports = tokenCheckerMiddleware;

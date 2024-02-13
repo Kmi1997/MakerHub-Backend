@@ -1,0 +1,30 @@
+.popup-container {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #ffffff;
+    z-index: 999;
+}
+
+.popup-content {
+    background-color: #ffffff;
+    padding: 20px;
+    text-align: center;
+}
+
+.popup-p{
+    text-align: justify;
+    margin-top: 10%;
+    margin-left: 10%;
+    background-color: #ffffff;
+}
+
+.popup-content button {
+    padding: 10px 20px;
+    background-color: #ff5900;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}

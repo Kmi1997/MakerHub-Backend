@@ -6,11 +6,6 @@ require("dotenv").config({
 
 const publicController = {
 
-    home: async (req, res) => {
-        try { res.status(200).render('headerPublic'); }
-        catch (error) { res.status(500).render('error') }
-    },
-
     internships: async (req, res) => {
         const activated = true;
         const attribute = []

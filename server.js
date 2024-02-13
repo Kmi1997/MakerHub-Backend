@@ -41,12 +41,12 @@ app.get('/', (req, res) => {
 })
 
 // dev server
-if (process.env.ENVIRONNEMENT =='DEV'){
+if (process.env.ENVIRONNEMENT ==='DEV'){
     app.listen(process.env.PORT, '0.0.0.0', () => {
         console.log(`Server running on ${process.env.PORT}, release ${release}`);
     });
 }
-else if (process.env.ENVIRONNEMENT == 'PROD'){
+else if (process.env.ENVIRONNEMENT === 'PROD'){
     app.listen(process.env.PORT, '0.0.0.0', () => {
         console.log(`Server running on ${process.env.PORT}, release ${release}`);
     });
