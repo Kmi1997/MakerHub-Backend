@@ -46,8 +46,7 @@ if (process.env.ENVIRONNEMENT =='DEV'){
         console.log(`Server running on ${process.env.PORT}, release ${release}`);
     });
 }
-
-if (process.env.ENVIRONNEMENT == 'PROD'){
+else if (process.env.ENVIRONNEMENT == 'PROD'){
     app.listen(process.env.PORT, '0.0.0.0', () => {
         console.log(`Server running on ${process.env.PORT}, release ${release}`);
     });
@@ -55,13 +54,13 @@ if (process.env.ENVIRONNEMENT == 'PROD'){
         key: fs.readFileSync("/etc/letsencrypt/live/www.scoolfamily.be/privkey.pem"),
         cert: fs.readFileSync("/etc/letsencrypt/live/www.scoolfamily.be/fullchain.pem"),
     }, app);
-    console.log(`Serveur démarré en HTTPS, release ${release}`)
+    console.log(`Server running on HTTPS, release ${release}`)
     httpsServer.listen(443);
 }
+else{
+    console.log("Choose DEV or PROD env.")
+}
 
-//Server activated
-// app.listen(process.env.PORT, '0.0.0.0', () => {
-//     console.log(`Server running on ${process.env.PORT}, release ${release}`);
-// })
+
 
 

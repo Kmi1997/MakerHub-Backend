@@ -7,7 +7,7 @@
 header {
     height: 18vh;
     background-color: #000000;
-    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    box-shadow: 2px 2px 5px rgb(0, 0, 0);
 }
 
 #logo{
@@ -83,7 +83,9 @@ ul li:nth-child(4) a {
 
     #burger{
         display: block;
-        margin-left: 5%;
+        margin-left: 3%;
+        background: #ff5900;
+        margin-top: -3%;
     }
 
     #fb_link{
