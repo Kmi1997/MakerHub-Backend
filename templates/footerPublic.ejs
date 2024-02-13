@@ -20,11 +20,13 @@
     console.log(footer)
     window.addEventListener("scroll", function() {
         // Vérifie si on est à la fin de la page
-        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
-            footer.style.transform = 'translateY(100%)';
-        }
-        else {
-            footer.style.transform = 'translateY(0%)';
+        if (document.body.offsetHeight > window.innerHeight) {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+                footer.style.transform = 'translateY(100%)';
+            }
+            else {
+                footer.style.transform = 'translateY(0%)';
+            }
         }
     });
 </script>

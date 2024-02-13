@@ -13,7 +13,7 @@ const {urlencoded} = require("express");
 const cookieParser = require('cookie-parser');
 const fs = require('fs');
 const https = require('https');
-const release = '0.0.7b';
+const release = '0.0.8b';
 
 //DB Sync
 db.sequelize.sync().then(() => {
