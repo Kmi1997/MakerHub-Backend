@@ -4,11 +4,6 @@ const internService = require("../services/intern.service");
 
 const adminController = {
 
-    internships: async (req, res) => {
-        try { res.status(200).render('internships'); }
-        catch (error) { res.status(500).render('error') }
-    },
-
     viewInternships: async (req, res) => {
 
         try{

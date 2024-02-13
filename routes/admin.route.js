@@ -3,7 +3,6 @@ const adminController = require("../controllers/admin.controller");
 const adminRouter = express.Router();
 const TokenCheckerMiddleware = require('../middlewares/tokenChecker.middleware');
 
-adminRouter.get('/home', TokenCheckerMiddleware(), adminController.internships);
 adminRouter.get('/internships', TokenCheckerMiddleware(), adminController.viewInternships);
 adminRouter.get('/internships/editInternship',TokenCheckerMiddleware(), adminController.editInternship);
 adminRouter.get("/internships/addnewinternship", TokenCheckerMiddleware(), adminController.addNewInternship);
