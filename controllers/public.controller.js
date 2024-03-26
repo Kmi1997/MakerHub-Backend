@@ -7,10 +7,8 @@ require("dotenv").config({
 const publicController = {
 
     internships: async (req, res) => {
-        const activated = true;
-        const attribute = []
         try{
-            const internships = await internshipService.getInternship(attribute, activated);
+            const internships = await internshipService.getInternship();
             await Promise.all(internships.map(async (elem) => {
                 if (elem.image) {
                     elem.image = elem.image.toString('base64');
@@ -37,6 +35,11 @@ const publicController = {
             res.status(200).render('signIn', {data : internship,  errors : null});
         }
         catch(err){ res.status(404).render('signIn', {errors : "Le stage n'existe pas.."}); }
+    },
+
+    gallery: async (req, res) => {
+        const oldInternships = await internshipService.getOldInternships();
+        res.status(200).render('gallery', {data: oldInternships});
     }
 }
 

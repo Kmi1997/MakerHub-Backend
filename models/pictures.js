@@ -12,10 +12,10 @@ const PicturesModel = (sequelize) => {
             internship_id: {
                 type: DataTypes.INTEGER,
                 allowNull: false,
-                picture: {
-                    type: DataTypes.BLOB('long'),
-                    allowNull: true
-                },
+            picture: {
+                type: DataTypes.BLOB('long'),
+                allowNull: true
+            },
                 picture_name: {
                     type: DataTypes.STRING,
                     allowNull: false
