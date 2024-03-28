@@ -17,10 +17,11 @@ const release = '0.0.8b';
 
 //DB Sync
 db.sequelize.sync().then(() => {
-    console.log("DB sync ok");
-    app.set('view engine', 'ejs');
-    app.set('views', path.join(__dirname, 'templates'));
-});
+    console.log("DB sync ok")
+}).catch(() => console.log("!! DB sync not ok !!"));
+
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'templates'));
 
 //Globals middlewares
 app.use(cors());
