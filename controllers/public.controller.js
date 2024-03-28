@@ -1,5 +1,6 @@
 const internshipService = require("../services/internship.service");
 const fetch = require('node-fetch');
+const activated = true;
 require("dotenv").config({
     path: `.env.${process.env.NODE_ENV}`
 });
@@ -7,8 +8,8 @@ require("dotenv").config({
 const publicController = {
 
     internships: async (req, res) => {
-        try{
-            const internships = await internshipService.getInternship();
+        try {
+            const internships = await internshipService.getInternship( [], activated);
             await Promise.all(internships.map(async (elem) => {
                 if (elem.image) {
                     elem.image = elem.image.toString('base64');
@@ -17,12 +18,14 @@ const publicController = {
                     elem.geo = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(elem.place)}`)
                     elem.geo = await elem.geo.json();
                     elem.geo = {lat: elem.geo[0].lat, lon: elem.geo[0].lon}
+                } catch (error) {
+                    elem.geo = null
                 }
-                catch(error) { elem.geo = null }
             }));
-            res.status(200).render('internshipsPublic', {data : internships});
+            res.status(200).render('internshipsPublic', {data: internships});
+        } catch (err) {
+            res.status(500).render('error');
         }
-        catch(err){ res.status(500).render('error'); }
     },
 
     contact: async (req, res) => {
@@ -38,7 +41,7 @@ const publicController = {
     },
 
     gallery: async (req, res) => {
-        const oldInternships = await internshipService.getOldInternships();
+        const oldInternships = await internshipService.getOldInternships(['name'], true);
         res.status(200).render('gallery', {data: oldInternships});
     }
 }

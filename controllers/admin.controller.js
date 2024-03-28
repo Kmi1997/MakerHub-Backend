@@ -1,7 +1,6 @@
 const adminService = require("../services/admin.service");
 const internshipService = require("../services/internship.service");
 const internService = require("../services/intern.service");
-
 const adminController = {
 
     viewInternships: async (req, res) => {

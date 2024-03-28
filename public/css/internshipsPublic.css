@@ -14,12 +14,12 @@
     width: calc(33.33% - 50px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     height: 520px;
-    overflow-y: auto;
     overflow: auto;
 }
 
 #no_internship{
-    font-size: 2em;
+    font-size: 1.5em;
+    margin-top: 10%;
 }
 
 .internship > div {
@@ -65,7 +65,7 @@
 }
 
 .modal {
-    display: none; /* La modal est initialement cachée */
+    display: none;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -73,11 +73,11 @@
     width: 100%;
     height: 100%;
     overflow: auto; /* Permet le défilement si nécessaire */
-    background-color: rgba(0, 0, 0, 0.9); /* Fond noir semi-transparent */
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 .modal-content {
-    margin: auto; /* Centre l'image dans la modal */
+    margin: auto;
     display: block;
     max-width: 80%; /* Largeur maximale de l'image agrandie */
     max-height: 80vh; /* Hauteur maximale de l'image agrandie */

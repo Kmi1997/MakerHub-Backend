@@ -5,9 +5,12 @@ async function addInternship(data) {
     await db.Internship.create(data, {});
 }
 
-async function getInternship(attribute = [], activated= true) {
+async function getInternship(attribute = [], activated= null) {
     let internship;
-    const activatedCondition = { activated: activated};
+    let activatedCondition = {};
+    if (activated != null){
+        activatedCondition = { activated: activated};
+    }
     if (attribute.length > 0) {
         internship = await db.Internship.findAll({
             attributes: attribute,
@@ -65,10 +68,29 @@ async function destroy(id) {
     return await toDelete.destroy();
 }
 
-async function getOldInternships(){
-    return await db.Internship.findAll({
-        where: { endDate: {[Op.lt]: new Date()}, activated: false}
-    });
+async function getOldInternships(attribute = [], picture){
+    let oldInternships;
+    try{
+        if (attribute.length == 0){
+            oldInternships =  await db.Internship.findAll({
+                where: { endDate: {[Op.lt]: new Date()}, activated: false},
+                include: [{
+                    model: db.Picture
+                }]
+            });
+        }
+        else{
+            oldInternships =  await db.Internship.findAll({
+                attributes: attribute,
+                where: { endDate: {[Op.lt]: new Date()}, activated: false},
+                include: [{
+                    model: db.Picture
+                }]
+            });
+        }
+    }catch (error) { console.log(error)}
+
+    return oldInternships
 }
 
 module.exports = {

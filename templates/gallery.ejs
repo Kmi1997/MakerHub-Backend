@@ -9,5 +9,15 @@
 </head>
 <body>
 <%- include('headerPublic') %>
+<section>
+    <% if (data.length > 0){ %>
+    <div id="select_box">
+        <select>
+            <option></option>
+        </select>
+    </div>
+</section>
+<script src="/cookiePopup.js"></script>
+<%- include('footerPublic') %>
 </body>
 </html>
